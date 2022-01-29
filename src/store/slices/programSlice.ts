@@ -21,9 +21,9 @@ const programSlice = createSlice({
     [getPrograms.pending.type]: state => {
       state.isLoading = true;
     },
-    [getPrograms.fulfilled.type]: (state, action: PayloadAction<IService[]>) => {
+    [getPrograms.fulfilled.type]: (state, {payload}: PayloadAction<IService[]>) => {
       state.isLoading = false;
-      state.programs = action.payload
+      state.programs = payload
     },
   }
 });
