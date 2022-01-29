@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import MenuComponent from "../components/MenuComponent";
+import MenuComponent from "../components/ui/MenuComponent";
 import {Route, Routes} from "react-router-dom";
 import HomePage from "./HomePage";
 import GamePage from "./GamesPage";

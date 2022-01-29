@@ -3,7 +3,7 @@ import {Button, Card, Input} from "antd";
 import {LockOutlined} from "@ant-design/icons";
 import requester from "../utils/requester";
 import {errorMessage, successMessage} from "../utils/messages";
-import {setUser} from "../store/slices/userSlice";
+import {setUser} from "../store/slices/authSlice";
 import {useDispatch} from "react-redux";
 import Title from "antd/lib/typography/Title";
 

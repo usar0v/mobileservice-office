@@ -1,18 +1,19 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Button, Table} from "antd";
+import {Button, Empty, Table} from "antd";
 import requester from "../../utils/requester";
 import '../../styles.less';
+import {IUser} from "../../models/IUser";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {getAllUsers} from "../../service/userService";
 
 const UserTable: FC = () => {
-  const [users, setUsers] = useState([]);
+  const {users, loading} = useAppSelector(state => state.user);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    requester
-      .get('user')
-      .then(data => {
-        setUsers(data);
-      })
+    dispatch(getAllUsers());
   }, []);
+
 
 
   const columns = [
@@ -46,7 +47,7 @@ const UserTable: FC = () => {
     {
       title: 'Подробнее',
       key: 'details',
-      render: (money: number) => {
+      render: () => {
         return (
           <div style={{textAlign: 'center'}}>
             <Button>Подробнее</Button>
@@ -60,14 +61,17 @@ const UserTable: FC = () => {
     <>
       <div className={'table_container'}>
         <Table
-          // rowKey={user => `${user.id}`}
+          rowKey={(user: IUser) => user.id}
           bordered={true}
-          // loading={true}
+          locale={{
+            emptyText: (
+              <Empty description={'Пусто'} style={{margin: 50}}/>
+            )
+          }}
+          loading={loading}
           dataSource={users}
           columns={columns}
-          scroll={{
-            x: true
-          }}
+          scroll={{x: true}}
           pagination={{
             defaultPageSize: 10,
             showSizeChanger: true,

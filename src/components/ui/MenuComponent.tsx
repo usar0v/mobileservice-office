@@ -1,23 +1,34 @@
 import React, {FC} from 'react';
 import {Layout, Menu} from "antd";
-import '../styles.less';
-import {MenuItems} from "../utils";
-import {useNavigate} from "react-router-dom";
+import '../../styles.less';
+import {MenuItems} from "../../utils";
+import {useLocation, useNavigate} from "react-router-dom";
 
-const { Content, Footer, Sider} = Layout;
+const {Content, Footer, Sider} = Layout;
 
 const MenuComponent: FC = ({children}) => {
   const navigate = useNavigate();
-
+  const {pathname} = useLocation();
+  console.log(pathname)
   return (
     <>
-      <Layout className={'h-100'}>
+      <Layout>
         <Sider
           breakpoint="sm"
           collapsedWidth="0"
         >
           <div className="logo"/>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
+          <Menu
+            theme="dark"
+            mode="inline"
+            selectedKeys={
+              [pathname === '/users' ? '1' :
+                pathname === '/programs' ? '2' :
+                  pathname === '/games' ? '4' :
+                    pathname === '/phones' ? '3' : '0'
+              ]
+            }
+            defaultSelectedKeys={['0']}>
             {
               MenuItems.map((item, index) =>
                 <Menu.Item
@@ -32,8 +43,8 @@ const MenuComponent: FC = ({children}) => {
           </Menu>
         </Sider>
         <Layout>
-          <Content style={{margin: '24px 16px 0'}}>
-            <div className="site-layout-background" style={{padding: 24, minHeight: 360}}>
+          <Content style={{margin: '16px'}}>
+            <div className="content">
               {children}
             </div>
           </Content>

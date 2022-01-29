@@ -1,41 +1,37 @@
-import {createSlice} from "@reduxjs/toolkit";
-import jwtDecode from "jwt-decode";
-import storage from "../../utils/storage";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IUser} from "../../models/IUser";
+import {getAllUsers} from "../../service/userService";
 
-interface UserType {
-  user: IUser | null;
-  token: string | null;
-  isAuth: boolean;
+interface IUserSlice {
+  users: IUser[];
+  currentUser: IUser | null;
+  loading: boolean;
 }
 
-const initialState: UserType = {
-  user: null,
-  token: null,
-  isAuth: false,
+const initialState: IUserSlice = {
+  users: [],
+  currentUser: null,
+  loading: false
 }
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser(state, {payload}) {
-      if (payload.token) {
-        const token = payload.token;
-        state.token = token;
-        state.user = jwtDecode(token);
-        state.isAuth = true;
-        storage.set('token', token);
-      }
+    setCurrentUser(state, action: PayloadAction<number>) {
+      state.currentUser = state.users.filter(item => item.id === action.payload)[0];
+    }
+  },
+  extraReducers: {
+    [getAllUsers.pending.type]: (state) => {
+      state.loading = true;
     },
-    signOut(state) {
-      storage.remove('token')
-      state.isAuth = false;
-      state.token = null;
-      state.user = null;
-    },
+    [getAllUsers.fulfilled.type]: (state, {payload}: PayloadAction<IUser[]>) => {
+      state.users = payload;
+      state.loading = false;
+    }
   }
 });
 
 export default userSlice.reducer;
-export const {setUser} = userSlice.actions
+export const {setCurrentUser} = userSlice.actions;

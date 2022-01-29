@@ -4,13 +4,13 @@ import AuthPage from "./pages/AuthPage";
 import {useAppSelector} from "./hooks";
 import requester from "./utils/requester";
 import {useDispatch} from "react-redux";
-import {setUser} from "./store/slices/userSlice";
+import {setUser} from "./store/slices/authSlice";
 import Spinner from "./utils/spinner";
 
 const App: FC = () => {
   const [loading, setLoading] = useState(false);
 
-  const {isAuth} = useAppSelector(state => state.user);
+  const {isAuth} = useAppSelector(state => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
