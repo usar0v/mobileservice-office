@@ -1,11 +1,14 @@
 import React, {FC} from 'react';
 import {Layout, Menu} from "antd";
-import {UploadOutlined, UserOutlined, VideoCameraOutlined} from "@ant-design/icons";
 import '../styles.less';
+import {MenuItems} from "../utils";
+import {useNavigate} from "react-router-dom";
 
 const {Header, Content, Footer, Sider} = Layout;
 
 const MenuComponent: FC = ({children}) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Layout className={'h-100'}>
@@ -14,19 +17,18 @@ const MenuComponent: FC = ({children}) => {
           collapsedWidth="0"
         >
           <div className="logo"/>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-            <Menu.Item key="1" icon={<UserOutlined/>}>
-              nav 1
-            </Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined/>}>
-              nav 2
-            </Menu.Item>
-            <Menu.Item key="3" icon={<UploadOutlined/>}>
-              nav 3
-            </Menu.Item>
-            <Menu.Item key="4" icon={<UserOutlined/>}>
-              nav 4
-            </Menu.Item>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
+            {
+              MenuItems.map((item, index) =>
+                <Menu.Item
+                  onClick={() => navigate(item.path)}
+                  key={index}
+                  icon={item.icon}
+                >
+                  {item.title}
+                </Menu.Item>
+              )
+            }
           </Menu>
         </Sider>
         <Layout>
