@@ -4,13 +4,18 @@ import Title from "antd/lib/typography/Title";
 import {useAppDispatch, useAppSelector} from "../hooks";
 import {getGames} from "../service/gameService";
 import Spinner from "../utils/spinner";
+import UpdateService from "../components/modals/UpdateService";
+import {getGamesBrand} from "../service/brandService";
+import {RobotOutlined} from "@ant-design/icons";
 
 const GamePage = () => {
   const dispatch = useAppDispatch();
   const {games, isLoading} = useAppSelector(state => state.game)
+  const {gamesBrand} = useAppSelector(state => state.brand);
 
   useEffect(() => {
     dispatch(getGames());
+    dispatch(getGamesBrand());
   }, []);
 
   if (isLoading) {
@@ -19,12 +24,16 @@ const GamePage = () => {
 
   return (
     <>
-      <Title style={{marginBottom: 17}} level={3}>Игры - 10</Title>
+      <Title className={'title'} level={3}>
+        <RobotOutlined style={{marginRight: 10}}/>
+        Телефоны
+      </Title>
+      <UpdateService brands={gamesBrand}/>
       {games.map(item => (
-        <>
-          <Title style={{marginBottom: 10}} level={4}>{item.title}</Title>
-          <AppTable data={item.items}/>
-        </>
+        <div key={item.title}>
+          <span className={'title service_title'}>{item.title}</span>
+          <AppTable brand={gamesBrand} data={item.items}/>
+        </div>
       ))}
     </>
   );

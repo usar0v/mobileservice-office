@@ -3,7 +3,6 @@ import {IBrand} from "../../models/IBrand";
 import {getGamesBrand, getPhonesBrand, getProgramsBrand} from "../../service/brandService";
 
 
-
 interface brandType {
   programsBrand: IBrand[];
   gamesBrand: IBrand[];
@@ -34,4 +33,3 @@ const brandSlice = createSlice({
 });
 
 export default brandSlice.reducer;
-export const {} = brandSlice.actions

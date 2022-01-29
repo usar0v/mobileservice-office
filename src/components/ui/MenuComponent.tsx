@@ -9,7 +9,7 @@ const {Content, Footer, Sider} = Layout;
 const MenuComponent: FC = ({children}) => {
   const navigate = useNavigate();
   const {pathname} = useLocation();
-  console.log(pathname)
+
   return (
     <>
       <Layout>

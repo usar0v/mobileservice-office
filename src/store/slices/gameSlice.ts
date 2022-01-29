@@ -21,9 +21,9 @@ const gameSlice = createSlice({
     [getGames.pending.type]: state => {
       state.isLoading = true;
     },
-    [getGames.fulfilled.type]: (state, action: PayloadAction<IService[]>) => {
+    [getGames.fulfilled.type]: (state, {payload}: PayloadAction<IService[]>) => {
       state.isLoading = false;
-      state.games = action.payload
+      state.games = payload
     },
   }
 });
