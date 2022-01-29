@@ -1,16 +1,16 @@
 import {
   AndroidOutlined,
-  HomeOutlined,
   MobileOutlined,
   UserOutlined,
-  RobotOutlined
+  RobotOutlined,
+  PieChartOutlined
 } from "@ant-design/icons";
 
 export const MenuItems = [
   {
-    title: 'Главная',
+    title: 'Отчеты',
     path: '/',
-    icon: <HomeOutlined />,
+    icon: <PieChartOutlined />,
   },
   {
     title: 'Пользователи',
