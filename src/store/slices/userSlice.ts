@@ -1,25 +1,36 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IUser} from "../../models/IUser";
-import {getAllUsers} from "../../service/userService";
+import {addBalance, changeRole, getAllUsers} from "../../service/userService";
 
 interface IUserSlice {
   users: IUser[];
   currentUser: IUser | null;
   loading: boolean;
+  currentUserModal: boolean;
+  changeRoleLoading: boolean;
+  addBalanceLoading: boolean;
 }
 
 const initialState: IUserSlice = {
   users: [],
   currentUser: null,
-  loading: false
+  loading: false,
+  currentUserModal: false,
+  changeRoleLoading: false,
+  addBalanceLoading: false,
 }
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setCurrentUser(state, action: PayloadAction<number>) {
-      state.currentUser = state.users.filter(item => item.id === action.payload)[0];
+    showCurrentUserModal(state, {payload}: PayloadAction<IUser>) {
+      state.currentUser = payload;
+      state.currentUserModal = true;
+    },
+    hideCurrentUserModal(state) {
+      state.currentUser = null;
+      state.currentUserModal = false;
     }
   },
   extraReducers: {
@@ -29,9 +40,34 @@ const userSlice = createSlice({
     [getAllUsers.fulfilled.type]: (state, {payload}: PayloadAction<IUser[]>) => {
       state.users = payload;
       state.loading = false;
+    },
+    [changeRole.pending.type]: (state) => {
+      state.changeRoleLoading = true;
+    },
+    [changeRole.fulfilled.type]: (state, {payload}: PayloadAction<IUser>) => {
+      state.changeRoleLoading = false;
+      state.users = state.users.map(item => {
+        if (item.id === payload.id) return payload;
+        return  item;
+      });
+      state.currentUser = payload;
+    },
+    [addBalance.pending.type]: (state) => {
+      state.addBalanceLoading = true;
+    },
+    [addBalance.fulfilled.type]: (state, {payload}: PayloadAction<IUser>) => {
+      state.addBalanceLoading = false;
+      state.users = state.users.map(item => {
+        if (item.id === payload.id) return payload;
+        return  item;
+      });
+      state.currentUser = payload;
     }
   }
 });
 
 export default userSlice.reducer;
-export const {setCurrentUser} = userSlice.actions;
+export const {
+  showCurrentUserModal,
+  hideCurrentUserModal
+} = userSlice.actions;
