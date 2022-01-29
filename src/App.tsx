@@ -4,8 +4,8 @@ import AuthPage from "./pages/AuthPage";
 
 const App: FC = () => {
   return (
-    // <AppPage/>
-    <AuthPage/>
+    <AppPage/>
+    // <AuthPage/>
   );
 };
 
