@@ -7,14 +7,12 @@ interface UserType {
   user: IUser | null;
   token: string | null;
   isAuth: boolean;
-  checkLoading: boolean;
 }
 
 const initialState: UserType = {
   user: null,
   token: null,
   isAuth: false,
-  checkLoading: false,
 }
 
 const userSlice = createSlice({

@@ -25,9 +25,8 @@ const request = (method: Method, command: string, data: any, token: string | nul
 };
 
 export default {
-  get: async (command: string, data: any) => {
+  get: async (command: string, data = {}) => {
     const response = await request('get', command, data, storage.get('token'));
-    console.log(response);
     return response.data;
   },
   post: async (command: string, data = {}) => {
