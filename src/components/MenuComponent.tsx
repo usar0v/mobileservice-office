@@ -4,7 +4,7 @@ import '../styles.less';
 import {MenuItems} from "../utils";
 import {useNavigate} from "react-router-dom";
 
-const {Header, Content, Footer, Sider} = Layout;
+const { Content, Footer, Sider} = Layout;
 
 const MenuComponent: FC = ({children}) => {
   const navigate = useNavigate();
