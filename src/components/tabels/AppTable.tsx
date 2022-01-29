@@ -11,7 +11,7 @@ const columns = [
   {
     title: 'Бренд',
     key: 'brand',
-    dataIndex: 'brand',
+    dataIndex: 'brandId',
     render: (text: string) => <span>{text}</span>,
   },
   {
@@ -27,13 +27,17 @@ const columns = [
     render: (text: string) => <span>{text} мин</span>,
   },
   {
-    title: 'Действия',
-    key: 'action',
+    title: 'Редактирование',
+    key: 'redactor',
     render: (text: string, record: any) => (
-      <Space size={0}>
-        <Button type={'link'}>Редактировать</Button>
-        <Button danger type={'link'}>Удалить</Button>
-      </Space>
+      <Button type={'link'}>Редактировать</Button>
+    ),
+  },
+  {
+    title: 'Удаление',
+    key: 'remove',
+    render: (text: string, record: any) => (
+      <Button danger type={'link'}>Удалить</Button>
     ),
   },
 ];

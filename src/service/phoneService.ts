@@ -5,7 +5,7 @@ import requester from "../utils/requester";
 export const getPhones = createAsyncThunk(
   'phone/getPhones',
   async () => {
-    const response = await requester.get(`brand/phone`);
+    const response = await requester.get(`phone`);
     return response;
   }
 );
