@@ -7,6 +7,7 @@ import PhonesPage from "./PhonesPage";
 import ProgramsPage from "./ProgramsPage";
 import UsersPage from "./UsersPage";
 import AddServicePage from "./AddServicePage";
+import AddBrandPage from "./AddBrandPage";
 
 const AppPage: FC = () => {
   return (
@@ -18,6 +19,7 @@ const AppPage: FC = () => {
         <Route path={'/programs'} element={<ProgramsPage/>}/>
         <Route path={'/users'} element={<UsersPage/>}/>
         <Route path={'/add_service'} element={<AddServicePage/>}/>
+        <Route path={'/add_brand'} element={<AddBrandPage/>}/>
       </Routes>
     </MenuComponent>
   );

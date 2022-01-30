@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IService, IServiceItem} from "../../models/IService";
 import {deletePhone, getPhones, updatePhone} from "../../service/phoneService";
+import {successMessage} from "../../utils/messages";
 
 
 interface phoneType {
@@ -53,12 +54,14 @@ const phoneSlice = createSlice({
       })
       state.updateLoading = false;
       state.currentModalVisible = false;
+      successMessage('Телефон успешно изменен');
     },
     [deletePhone.fulfilled.type]: (state, {payload}: PayloadAction<number>) => {
       state.phones = state.phones.map(item => {
         item.items = item.items.filter(v => v.id !== payload)
         return item
       })
+      successMessage('Телефон успешно удален');
     }
   }
 });

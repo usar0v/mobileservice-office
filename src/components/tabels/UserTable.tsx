@@ -83,26 +83,25 @@ const UserTable: FC = () => {
 
   return (
     <>
-
-        <Table
-          style={{marginTop: 15}}
-          rowKey={(user: IUser) => user.id}
-          bordered={true}
-          locale={{
-            emptyText: (
-              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={'Пусто'} style={{margin: 50}}/>
-            )
-          }}
-          loading={loading}
-          dataSource={filterUsers}
-          columns={columns}
-          scroll={{x: true}}
-          pagination={{
-            defaultPageSize: 10,
-            showSizeChanger: true,
-            pageSizeOptions: [5, 10, 20, 50, 100]
-          }}
-        />
+      <Table
+        style={{marginTop: 15}}
+        rowKey={(user: IUser) => user.id}
+        bordered={true}
+        locale={{
+          emptyText: (
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={'Пусто'} style={{margin: 50}}/>
+          )
+        }}
+        loading={loading}
+        dataSource={filterUsers}
+        columns={columns}
+        scroll={{x: true}}
+        pagination={{
+          defaultPageSize: 10,
+          showSizeChanger: true,
+          pageSizeOptions: [5, 10, 20, 50, 100]
+        }}
+      />
       <CurrentUserModal/>
     </>
   );

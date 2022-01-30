@@ -13,13 +13,12 @@ import {updatePhone} from "../../service/phoneService";
 import {updateProgram} from "../../service/programService";
 
 type Props = {
-  brands: IBrand[];
   currentModalVisible: boolean;
   currentService: IServiceItem;
   loading: boolean;
 };
 
-const UpdateServiceModal: FC<Props> = ({brands, currentModalVisible, currentService, loading}) => {
+const UpdateServiceModal: FC<Props> = ({currentModalVisible, currentService, loading}) => {
   const dispatch = useAppDispatch();
   const {pathname} = useLocation();
 
@@ -76,7 +75,7 @@ const UpdateServiceModal: FC<Props> = ({brands, currentModalVisible, currentServ
         title='Редактирование'
         onOk={updateService}
         confirmLoading={loading}
-        okButtonProps={{disabled: loading}}
+        okButtonProps={{disabled: loading || currentService === values}}
         onCancel={() => closeModal()}
         visible={currentModalVisible}>
         <Form.Item label='Название'>

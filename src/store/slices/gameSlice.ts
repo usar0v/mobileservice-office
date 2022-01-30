@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IService, IServiceItem} from "../../models/IService";
 import {deleteGame, getGames, updateGame} from "../../service/gameService";
-import {deletePhone} from "../../service/phoneService";
+import {successMessage} from "../../utils/messages";
 
 
 interface gameType {
@@ -54,12 +54,14 @@ const gameSlice = createSlice({
       })
       state.updateLoading = false;
       state.currentModalVisible = false;
+      successMessage('Игра успешно изменен');
     },
     [deleteGame.fulfilled.type]: (state, {payload}: PayloadAction<number>) => {
       state.games = state.games.map(item => {
         item.items = item.items.filter(v => v.id !== payload)
         return item
       })
+      successMessage('Игра успешно удален')
     }
   }
 });
