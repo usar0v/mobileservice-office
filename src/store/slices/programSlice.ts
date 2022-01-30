@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IService, IServiceItem} from "../../models/IService";
 import {deleteProgram, getPrograms, updateProgram} from "../../service/programService";
+import {successMessage} from "../../utils/messages";
 
 
 interface programType {
@@ -53,12 +54,14 @@ const programSlice = createSlice({
       })
       state.updateLoading = false;
       state.currentModalVisible = false;
+      successMessage('Программа успешно изменен');
     },
     [deleteProgram.fulfilled.type]: (state, {payload}: PayloadAction<number>) => {
       state.programs = state.programs.map(item => {
         item.items = item.items.filter(v => v.id !== payload)
         return item
       })
+      successMessage('Программа успешно удален');
     }
   }
 });
