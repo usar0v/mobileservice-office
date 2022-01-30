@@ -7,6 +7,7 @@ export interface IUser {
   sum: number;
   spentMoney: number;
   country: string;
+  discount: number;
   role: number;
   createdAt: string;
   updatedAt: string;
@@ -16,7 +17,13 @@ export interface IChangeUserRole {
   email: string;
   role: number;
 }
+
 export interface IAddBalance {
   email: string;
   balance: number;
+}
+
+export interface IAddDiscount {
+  email: string;
+  discount: number;
 }

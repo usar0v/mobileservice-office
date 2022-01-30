@@ -1,10 +1,11 @@
-import React, {FC, useState} from 'react';
-import {Button, Col, InputNumber, Modal, Popover, Row, Space} from "antd";
+import React, {useState} from 'react';
+import {Button, Col, Modal, Popover, Row, Space} from "antd";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {hideCurrentUserModal} from "../../store/slices/userSlice";
 import NumberSeparator from "../ui/NumberSeparator";
-import {addBalance, changeRole} from "../../service/userService";
-import {IUser} from "../../models/IUser";
+import { changeRole} from "../../service/userService";
+import AddBalancePopover from "../user/AddBalancePopover";
+import AddDiscountPopover from "../user/AddDiscountPopover";
 
 const CurrentUserModal = () => {
   const {
@@ -12,13 +13,16 @@ const CurrentUserModal = () => {
     currentUser,
     changeRoleLoading,
     addBalanceLoading,
+    addDiscountLoading,
   } = useAppSelector(state => state.user);
 
-  const [popover, setPopover] = useState(false);
+  const [balancePopover, setBalancePopover] = useState(false);
+  const [discountPopover, setDiscountPopover] = useState(false);
 
   const dispatch = useAppDispatch();
   const handleClick = () => dispatch(hideCurrentUserModal());
-  const changePopover = () => setPopover(p => !p);
+  const changeBalancePopover = () => setBalancePopover(p => !p);
+  const changeDiscountPopover = () => setDiscountPopover(p => !p);
 
   return (
     <>
@@ -80,10 +84,19 @@ const CurrentUserModal = () => {
               style={{color: currentUser?.role === 1 ? 'red' : '#003b34'}}>{(currentUser?.role === 1 ? 'Админ' : 'Пользователь').toUpperCase()}</div>
           </Col>
         </Row>
+        <Row justify={'space-between'} style={{marginBottom: 20}}>
+          <Col span={10}>
+            <b>Скидка:</b>
+          </Col>
+          <Col span={14}>
+            {currentUser?.discount} %
+          </Col>
+        </Row>
         <hr color={'#e1e1e1'}/>
-        <Row justify={'space-between'} style={{marginTop: 20}}>
+        <Row justify={'space-between'} gutter={[16, 16]} style={{marginTop: 20}}>
           <Col>
             <Button
+              block
               type={'primary'}
               loading={changeRoleLoading}
               danger
@@ -101,11 +114,28 @@ const CurrentUserModal = () => {
           </Col>
           <Col>
             <Popover
-              content={<AddBalance user={currentUser} setPopover={setPopover}/>}
+              content={<AddDiscountPopover user={currentUser} setPopover={setDiscountPopover}/>}
+              title="Процент скидки"
+              trigger="click"
+              visible={discountPopover}
+              onVisibleChange={changeDiscountPopover}
+            >
+              <Button
+                type="primary"
+                danger
+                loading={addDiscountLoading}
+              >
+                Добавить скиду
+              </Button>
+            </Popover>
+          </Col>
+          <Col>
+            <Popover
+              content={<AddBalancePopover user={currentUser} setPopover={setBalancePopover}/>}
               title="Пополнить баланс"
               trigger="click"
-              visible={popover}
-              onVisibleChange={changePopover}
+              visible={balancePopover}
+              onVisibleChange={changeBalancePopover}
             >
               <Button
                 type="primary"
@@ -124,41 +154,3 @@ const CurrentUserModal = () => {
 
 export default CurrentUserModal;
 
-interface IAddBalance {
-  user: IUser | null;
-  setPopover: (prev: (prev: any) => boolean ) => void;
-}
-
-const AddBalance: FC<IAddBalance> = ({user, setPopover}) => {
-  const [balance, setBalance] = useState(10);
-  const {addBalanceLoading} = useAppSelector(state => state.user);
-  const dispatch = useAppDispatch();
-
-  return (
-    <>
-      <Space>
-        <InputNumber
-          min={10}
-          value={balance}
-          onChange={setBalance}
-        />
-        <Button
-          disabled={balance < 10}
-          loading={addBalanceLoading}
-          danger
-          onClick={() => {
-            if (user) {
-              dispatch(addBalance({
-                email: user.email,
-                balance: user.sum + balance
-              }))
-              setPopover(prev => !prev);
-            }
-          }}
-        >
-          пополнить
-        </Button>
-      </Space>
-    </>
-  )
-}

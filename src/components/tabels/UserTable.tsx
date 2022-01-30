@@ -8,14 +8,14 @@ import {showCurrentUserModal} from "../../store/slices/userSlice";
 import CurrentUserModal from "../modals/CurrentUserModal";
 import NumberSeparator from "../ui/NumberSeparator";
 
+
 const UserTable: FC = () => {
-  const {users, loading} = useAppSelector(state => state.user);
+  const {loading, filterUsers} = useAppSelector(state => state.user);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getAllUsers());
   }, []);
-
 
   const columns = [
     {
@@ -26,14 +26,12 @@ const UserTable: FC = () => {
     {
       title: 'Имя',
       dataIndex: 'fullName',
-      key: 'fullName'
+      key: 'fullName',
     },
     {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
-      render: (email: string, user: IUser) => <span
-        style={{color: user.role === 1 ? '#a90000' : 'black'}}>{email}</span>
     },
     {
       title: 'Баланс',
@@ -42,10 +40,31 @@ const UserTable: FC = () => {
       render: (money: number) => <NumberSeparator sum={money}/>
     },
     {
-      title: 'Потратиль',
+      title: 'Потраченные',
       dataIndex: 'spentMoney',
       key: 'spentMoney',
       render: (money: number) => <NumberSeparator sum={money}/>
+    },
+    {
+      title: 'Роли',
+      dataIndex: 'role',
+      key: 'role',
+      // filters: [
+      //   {
+      //     text: 'Пользователи',
+      //     value: 3,
+      //   },
+      //   {
+      //     text: 'Админы',
+      //     value: 1,
+      //   },
+      // ],
+      // onFilter: (value: number, user: IUser) => user.role === value,
+      render: (role: number) => (
+        role === 1 ?
+          <div style={{color: 'red'}}>АДМИН</div> :
+          <div style={{color: '#003b34'}}>ПОЛЬЗОВАТЕЛЬ</div>
+      ),
     },
     {
       title: 'Подробнее',
@@ -64,8 +83,9 @@ const UserTable: FC = () => {
 
   return (
     <>
-      <div className={'table_container'}>
+
         <Table
+          style={{marginTop: 15}}
           rowKey={(user: IUser) => user.id}
           bordered={true}
           locale={{
@@ -74,7 +94,7 @@ const UserTable: FC = () => {
             )
           }}
           loading={loading}
-          dataSource={users}
+          dataSource={filterUsers}
           columns={columns}
           scroll={{x: true}}
           pagination={{
@@ -83,7 +103,6 @@ const UserTable: FC = () => {
             pageSizeOptions: [5, 10, 20, 50, 100]
           }}
         />
-      </div>
       <CurrentUserModal/>
     </>
   );
