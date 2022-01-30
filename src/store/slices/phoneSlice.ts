@@ -1,31 +1,33 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IService, IServiceItem} from "../../models/IService";
-import {getPhones} from "../../service/phoneService";
+import {deletePhone, getPhones, updatePhone} from "../../service/phoneService";
 
 
 interface phoneType {
   phones: IService[];
   isLoading: boolean;
   currentModalVisible: boolean;
-  currentService: IServiceItem | any;
+  currentPhone?: IServiceItem | any;
+  updateLoading: boolean;
 }
 
 const initialState: phoneType = {
   phones: [],
   isLoading: false,
   currentModalVisible: false,
-  currentService: {},
+  currentPhone: {},
+  updateLoading: false,
 }
 
 const phoneSlice = createSlice({
   name: 'phone',
   initialState,
   reducers: {
-    showUpdateModal (state, {payload}: PayloadAction<IServiceItem>) {
-      state.currentService = payload;
+    showUpdatePhoneModal(state, {payload}: PayloadAction<IServiceItem>) {
+      state.currentPhone = payload;
       state.currentModalVisible = true;
     },
-    closeUpdateModal (state) {
+    closeUpdatePhoneModal(state) {
       state.currentModalVisible = false;
     },
   },
@@ -37,8 +39,29 @@ const phoneSlice = createSlice({
       state.isLoading = false;
       state.phones = payload
     },
+    [updatePhone.pending.type]: (state) => {
+      state.updateLoading = true;
+    },
+    [updatePhone.fulfilled.type]: (state, {payload}: PayloadAction<IServiceItem>) => {
+      state.phones = state.phones.map(item => {
+        const items = item.items.map(v => {
+          if (v.id == payload.id) return payload;
+          return v;
+        })
+        item.items = items;
+        return item;
+      })
+      state.updateLoading = false;
+      state.currentModalVisible = false;
+    },
+    [deletePhone.fulfilled.type]: (state, {payload}: PayloadAction<number>) => {
+      state.phones = state.phones.map(item => {
+        item.items = item.items.filter(v => v.id !== payload)
+        return item
+      })
+    }
   }
 });
 
 export default phoneSlice.reducer;
-export const {showUpdateModal, closeUpdateModal} = phoneSlice.actions;
+export const {showUpdatePhoneModal, closeUpdatePhoneModal} = phoneSlice.actions;

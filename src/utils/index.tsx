@@ -3,7 +3,7 @@ import {
   MobileOutlined,
   UserOutlined,
   RobotOutlined,
-  PieChartOutlined
+  PieChartOutlined, PlusCircleOutlined
 } from "@ant-design/icons";
 
 export const MenuItems = [
@@ -31,5 +31,10 @@ export const MenuItems = [
     title: 'Игры',
     path: '/games',
     icon: <RobotOutlined />,
+  },
+  {
+    title: 'Добавить сервис',
+    path: '/add_service',
+    icon: <PlusCircleOutlined />,
   },
 ]

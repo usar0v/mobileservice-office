@@ -20,14 +20,13 @@ const brandSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [getPhonesBrand.fulfilled.type]: (state, action: PayloadAction<IBrand[]>) => {
-      state.phonesBrand = action.payload;
-    },
     [getGamesBrand.fulfilled.type]: (state, action: PayloadAction<IBrand[]>) => {
       state.gamesBrand = action.payload;
     },
     [getProgramsBrand.fulfilled.type]: (state, action: PayloadAction<IBrand[]>) => {
       state.programsBrand = action.payload;
+    },[getPhonesBrand.fulfilled.type]: (state, action: PayloadAction<IBrand[]>) => {
+      state.phonesBrand = action.payload;
     },
   }
 });

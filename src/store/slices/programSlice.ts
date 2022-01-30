@@ -1,22 +1,36 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IService} from "../../models/IService";
-import {getPrograms} from "../../service/programService";
+import {IService, IServiceItem} from "../../models/IService";
+import {deleteProgram, getPrograms, updateProgram} from "../../service/programService";
 
 
 interface programType {
   programs: IService[];
   isLoading: boolean;
+  currentModalVisible: boolean;
+  currentProgram: IServiceItem | any;
+  updateLoading: boolean;
 }
 
 const initialState: programType = {
   programs: [],
   isLoading: false,
+  currentModalVisible: false,
+  currentProgram: {},
+  updateLoading: false,
 }
 
 const programSlice = createSlice({
   name: 'program',
   initialState,
-  reducers: {},
+  reducers: {
+    showUpdateProgramModal(state, {payload}: PayloadAction<IServiceItem>) {
+      state.currentProgram = payload;
+      state.currentModalVisible = true;
+    },
+    closeUpdateProgramModal(state) {
+      state.currentModalVisible = false;
+    },
+  },
   extraReducers: {
     [getPrograms.pending.type]: state => {
       state.isLoading = true;
@@ -25,7 +39,29 @@ const programSlice = createSlice({
       state.isLoading = false;
       state.programs = payload
     },
+    [updateProgram.pending.type]: (state) => {
+      state.updateLoading = true;
+    },
+    [updateProgram.fulfilled.type]: (state, {payload}: PayloadAction<IServiceItem>) => {
+      state.programs = state.programs.map(item => {
+        const items = item.items.map(v => {
+          if (v.id == payload.id) return payload;
+          return v;
+        })
+        item.items = items;
+        return item;
+      })
+      state.updateLoading = false;
+      state.currentModalVisible = false;
+    },
+    [deleteProgram.fulfilled.type]: (state, {payload}: PayloadAction<number>) => {
+      state.programs = state.programs.map(item => {
+        item.items = item.items.filter(v => v.id !== payload)
+        return item
+      })
+    }
   }
 });
 
 export default programSlice.reducer;
+export const {showUpdateProgramModal, closeUpdateProgramModal} = programSlice.actions;

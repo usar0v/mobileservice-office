@@ -4,13 +4,13 @@ import Title from "antd/lib/typography/Title";
 import {getPhones} from "../service/phoneService";
 import {useAppDispatch, useAppSelector} from "../hooks";
 import Spinner from "../utils/spinner";
-import UpdateService from "../components/modals/UpdateService";
+import UpdateServiceModal from "../components/modals/UpdateServiceModal";
 import {getPhonesBrand} from "../service/brandService";
 import {MobileOutlined} from "@ant-design/icons";
 
 const PhonesPage = () => {
   const dispatch = useAppDispatch();
-  const {phones, isLoading} = useAppSelector(state => state.phone)
+  const {phones, isLoading, currentModalVisible, currentPhone, updateLoading} = useAppSelector(state => state.phone)
   const {phonesBrand} = useAppSelector(state => state.brand);
 
   useEffect(() => {
@@ -28,7 +28,12 @@ const PhonesPage = () => {
         <MobileOutlined style={{marginRight: 10}}/>
         Телефоны
       </Title>
-      <UpdateService brands={phonesBrand}/>
+      <UpdateServiceModal
+        loading={updateLoading}
+        currentService={currentPhone}
+        currentModalVisible={currentModalVisible}
+        brands={phonesBrand}/>
+
       {phones.map(item => (
         <div key={item.title}>
           <span className={'title service_title'}>{item.title}</span>
