@@ -1,10 +1,16 @@
 import React, {FC} from 'react';
-import {Button, Empty, Space, Table} from "antd";
+import {Button, Empty, Table} from "antd";
 import {IServiceItem} from "../../models/IService";
-import {useAppDispatch} from "../../hooks";
-import {showUpdateModal} from "../../store/slices/phoneSlice";
-import {IUser} from "../../models/IUser";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 import {IBrand} from "../../models/IBrand";
+import NumberSeparator from "../ui/NumberSeparator";
+import {useLocation} from "react-router-dom";
+import {showUpdatePhoneModal} from "../../store/slices/phoneSlice";
+import {showUpdateGameModal} from "../../store/slices/gameSlice";
+import {showUpdateProgramModal} from "../../store/slices/programSlice";
+import {deleteGame} from "../../service/gameService";
+import {deletePhone} from "../../service/phoneService";
+import {deleteProgram} from "../../service/programService";
 
 type Props = {
   data: any;
@@ -13,6 +19,7 @@ type Props = {
 
 const AppTable: FC<Props> = ({data, brand}) => {
   const dispatch = useAppDispatch();
+  const {pathname} = useLocation();
 
   const columns = [
     {
@@ -34,7 +41,7 @@ const AppTable: FC<Props> = ({data, brand}) => {
       title: 'Цена',
       dataIndex: 'price',
       key: 'price',
-      render: (text: string) => <span>{text} <u>c</u></span>,
+      render: (text: number) => <span><NumberSeparator sum={text}/></span>,
     },
     {
       title: 'Время',
@@ -46,17 +53,39 @@ const AppTable: FC<Props> = ({data, brand}) => {
       title: 'Редактирование',
       key: 'redactor',
       render: (text: string, record: IServiceItem) => (
-        <Button onClick={() => dispatch(showUpdateModal(record)) } type={'link'}>Редактировать</Button>
+        <Button onClick={() => showModal(record)} type={'link'}>Редактировать</Button>
       ),
     },
     {
       title: 'Удаление',
       key: 'remove',
       render: (text: string, record: any) => (
-        <Button danger type={'link'}>Удалить</Button>
+        <Button
+          onClick={() => deleteService(record.id)}
+          danger type={'link'}>Удалить</Button>
       ),
     },
   ];
+
+  const showModal = (record: IServiceItem) => {
+    if (pathname == '/phones') {
+      dispatch(showUpdatePhoneModal(record));
+    }else if (pathname == '/games') {
+      dispatch(showUpdateGameModal(record));
+    } else if (pathname == '/programs') {
+      dispatch(showUpdateProgramModal(record));
+    };
+  };
+
+  const deleteService = (id: number) => {
+    if (pathname == '/phones') {
+      dispatch(deletePhone(id));
+    }else if (pathname == '/games') {
+      dispatch(deleteGame(id));
+    } else if (pathname == '/programs') {
+      dispatch(deleteProgram(id));
+    };
+  };
 
   return (
     <div style={{marginBottom: 60}}>

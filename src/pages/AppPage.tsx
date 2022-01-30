@@ -6,6 +6,7 @@ import GamePage from "./GamesPage";
 import PhonesPage from "./PhonesPage";
 import ProgramsPage from "./ProgramsPage";
 import UsersPage from "./UsersPage";
+import AddServicePage from "./AddServicePage";
 
 const AppPage: FC = () => {
   return (
@@ -16,6 +17,7 @@ const AppPage: FC = () => {
         <Route path={'/phones'} element={<PhonesPage/>}/>
         <Route path={'/programs'} element={<ProgramsPage/>}/>
         <Route path={'/users'} element={<UsersPage/>}/>
+        <Route path={'/add_service'} element={<AddServicePage/>}/>
       </Routes>
     </MenuComponent>
   );

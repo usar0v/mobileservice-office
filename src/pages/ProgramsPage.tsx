@@ -5,12 +5,12 @@ import {useAppDispatch, useAppSelector} from "../hooks";
 import Spinner from "../utils/spinner";
 import {getPrograms} from "../service/programService";
 import {AndroidOutlined} from "@ant-design/icons";
-import UpdateService from "../components/modals/UpdateService";
+import UpdateServiceModal from "../components/modals/UpdateServiceModal";
 import {getProgramsBrand} from "../service/brandService";
 
 const ProgramsPage = () => {
   const dispatch = useAppDispatch();
-  const {programs, isLoading} = useAppSelector(state => state.program);
+  const {programs, isLoading, currentModalVisible, currentProgram, updateLoading} = useAppSelector(state => state.program);
   const {programsBrand} = useAppSelector(state => state.brand);
 
   useEffect(() => {
@@ -28,7 +28,11 @@ const ProgramsPage = () => {
         <AndroidOutlined style={{marginRight: 10}}/>
         Программы
       </Title>
-      <UpdateService brands={programsBrand}/>
+      <UpdateServiceModal
+        loading={updateLoading}
+        currentService={currentProgram}
+        currentModalVisible={currentModalVisible}
+        brands={programsBrand}/>
       {programs.map(item => (
         <div key={item.title}>
           <span className={'title service_title'}>{item.title}</span>

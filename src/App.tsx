@@ -4,7 +4,7 @@ import AuthPage from "./pages/AuthPage";
 import {useAppSelector} from "./hooks";
 import requester from "./utils/requester";
 import {useDispatch} from "react-redux";
-import {setUser} from "./store/slices/authSlice";
+import {setUser, signOut} from "./store/slices/authSlice";
 import Spinner from "./utils/spinner";
 
 const App: FC = () => {
@@ -19,15 +19,16 @@ const App: FC = () => {
 
   const authCheck = () => {
     setLoading(true);
-    requester.get('auth/check')
+    requester.get('auth/admin/check')
       .then(({token}) => {
         dispatch(setUser({token}));
       })
       .catch((err) => {
-        console.log(err.response.data);
+        dispatch(signOut());
       }).finally(() => {
       setLoading(false);
-    })
+
+    });
   };
 
   if (loading) {

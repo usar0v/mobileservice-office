@@ -1,22 +1,30 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Button, Form, Input, InputNumber, Modal, Row, Select, Space, Timeline} from "antd";
+import {Button, Form, Input, InputNumber, Modal, Select, Space, Timeline} from "antd";
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {closeUpdateModal} from "../../store/slices/phoneSlice";
 import {IBrand} from "../../models/IBrand";
 import {CloseOutlined} from "@ant-design/icons";
+import {useLocation} from "react-router-dom";
 import {IServiceItem} from "../../models/IService";
+import {closeUpdatePhoneModal} from "../../store/slices/phoneSlice";
+import {closeUpdateProgramModal} from "../../store/slices/programSlice";
+import {closeUpdateGameModal} from "../../store/slices/gameSlice";
+import {updateGame} from "../../service/gameService";
+import {updatePhone} from "../../service/phoneService";
+import {updateProgram} from "../../service/programService";
 
 type Props = {
-  brands: IBrand[]
+  brands: IBrand[];
+  currentModalVisible: boolean;
+  currentService: IServiceItem;
+  loading: boolean;
 };
 
-const UpdateService: FC<Props> = ({brands}) => {
+const UpdateServiceModal: FC<Props> = ({brands, currentModalVisible, currentService, loading}) => {
   const dispatch = useAppDispatch();
-  const {currentModalVisible, currentService} = useAppSelector(state => state.phone);
+  const {pathname} = useLocation();
 
   const [values, setValues] = useState(currentService);
   const [instruction, setInstruction] = useState<string>('');
-
 
   useEffect(() => {
     setValues(currentService);
@@ -32,24 +40,48 @@ const UpdateService: FC<Props> = ({brands}) => {
   };
 
   const addInstructionStep = () => {
-    const step = [...values.instructionStep, instruction]
+    const step = [...values.instructionStep, instruction];
     setValues({...values, instructionStep: step});
     setInstruction('');
   };
 
+  const closeModal = () => {
+    if (pathname == '/phones') {
+      dispatch(closeUpdatePhoneModal());
+    } else if (pathname == '/games') {
+      dispatch(closeUpdateGameModal());
+    } else if (pathname == '/programs') {
+      dispatch(closeUpdateProgramModal());
+    }
+    ;
+  };
+
+  const updateService = () => {
+    if (pathname == '/phones') {
+      dispatch(updatePhone(values));
+    } else if (pathname == '/games') {
+      dispatch(updateGame(values));
+    } else if (pathname == '/programs') {
+      dispatch(updateProgram(values));
+    }
+    ;
+  };
+
   return (
     <div>
-      <Modal style={{top: 20}} title='Редактирование' visible={currentModalVisible} onCancel={() => dispatch(closeUpdateModal())}>
+      <Modal
+        cancelText={'Отмена'}
+        okText={'Редактировать'}
+        style={{top: 20}}
+        title='Редактирование'
+        onOk={updateService}
+        confirmLoading={loading}
+        okButtonProps={{disabled: loading}}
+        onCancel={() => closeModal()}
+        visible={currentModalVisible}>
         <Form.Item label='Название'>
           <Input style={{width: 250}} value={values.title}
                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeValue(e, 'title')}/>
-        </Form.Item>
-        <Form.Item style={{width: 250}} label="Бренд">
-          <Select onChange={e => setValues({...values, brandId: e})} value={values.brandId}>
-            {brands.map(v => (
-              <Select.Option key={v.id} value={v.id}>{v.name}</Select.Option>
-            ))}
-          </Select>
         </Form.Item>
         <Form.Item label='Время (мин)'>
           <Input style={{width: 250}} value={values.term}
@@ -85,4 +117,4 @@ const UpdateService: FC<Props> = ({brands}) => {
   );
 };
 
-export default UpdateService;
+export default UpdateServiceModal;
