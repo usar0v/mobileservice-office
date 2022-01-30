@@ -7,6 +7,7 @@ import {BrowserRouter} from "react-router-dom";
 import './styles.less';
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import 'moment/locale/ru';
 
 const store = setupStore();
 

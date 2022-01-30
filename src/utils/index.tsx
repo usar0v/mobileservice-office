@@ -3,14 +3,16 @@ import {
   MobileOutlined,
   UserOutlined,
   RobotOutlined,
-  PieChartOutlined, PlusCircleOutlined
+  PlusCircleOutlined,
+  HomeOutlined
 } from "@ant-design/icons";
+
 
 export const MenuItems = [
   {
-    title: 'Отчеты',
+    title: 'Главная',
     path: '/',
-    icon: <PieChartOutlined />,
+    icon: <HomeOutlined />,
   },
   {
     title: 'Пользователи',
@@ -37,4 +39,10 @@ export const MenuItems = [
     path: '/add_service',
     icon: <PlusCircleOutlined />,
   },
-]
+];
+
+export const orderPaths = {
+  phones: '/ordered_phones',
+  games: '/ordered_games',
+  programs: '/ordered_programs',
+}

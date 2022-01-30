@@ -24,7 +24,6 @@ const AddDiscountPopover: FC<IAddDiscount> = ({user, setPopover}) => {
           onChange={setDiscount}
         />
         <Button
-          disabled={discount <= 0}
           loading={addDiscountLoading}
           danger
           onClick={() => {
