@@ -12,6 +12,12 @@ export interface IServiceItem {
 
 
 export interface IService {
+  id: number;
   title: string;
   items: IServiceItem[];
+}
+
+export interface IChangeServiceStatus {
+  id: number;
+  status: string;
 }

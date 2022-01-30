@@ -1,5 +1,5 @@
 import React, {FC, useEffect} from 'react';
-import {Button, Empty, Table} from "antd";
+import {Button} from "antd";
 import '../../styles.less';
 import {IUser} from "../../models/IUser";
 import {useAppDispatch, useAppSelector} from "../../hooks";
@@ -7,10 +7,12 @@ import {getAllUsers} from "../../service/userService";
 import {showCurrentUserModal} from "../../store/slices/userSlice";
 import CurrentUserModal from "../modals/CurrentUserModal";
 import NumberSeparator from "../ui/NumberSeparator";
+import TableTemplate from "./TableTemplate";
 
 
 const UserTable: FC = () => {
   const {loading, filterUsers} = useAppSelector(state => state.user);
+  const {user} = useAppSelector(state => state.auth);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -49,21 +51,22 @@ const UserTable: FC = () => {
       title: 'Роли',
       dataIndex: 'role',
       key: 'role',
-      // filters: [
-      //   {
-      //     text: 'Пользователи',
-      //     value: 3,
-      //   },
-      //   {
-      //     text: 'Админы',
-      //     value: 1,
-      //   },
-      // ],
-      // onFilter: (value: number, user: IUser) => user.role === value,
-      render: (role: number) => (
-        role === 1 ?
-          <div style={{color: 'red'}}>АДМИН</div> :
-          <div style={{color: '#003b34'}}>ПОЛЬЗОВАТЕЛЬ</div>
+      filters: [
+        {
+          text: 'Пользователи',
+          value: 3,
+        },
+        {
+          text: 'Админы',
+          value: 1,
+        },
+      ],
+      onFilter: (value: any, user: IUser) => user.role === value,
+      render: (role: number, item: IUser) => (
+        item.email === user?.email ? <div style={{color: '#008681'}}>ВЫ</div> :
+          role === 1 ?
+            <div style={{color: 'red'}}>АДМИН</div> :
+            <div style={{color: '#003b34'}}>ПОЛЬЗОВАТЕЛЬ</div>
       ),
     },
     {
@@ -83,25 +86,11 @@ const UserTable: FC = () => {
 
   return (
     <>
-      <Table
-        style={{marginTop: 15}}
+      <TableTemplate
         rowKey={(user: IUser) => user.id}
-        bordered={true}
-        locale={{
-          emptyText: (
-            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={'Пусто'} style={{margin: 50}}/>
-          )
-        }}
         loading={loading}
         dataSource={filterUsers}
-        columns={columns}
-        scroll={{x: true}}
-        pagination={{
-          defaultPageSize: 10,
-          showSizeChanger: true,
-          pageSizeOptions: [5, 10, 20, 50, 100]
-        }}
-      />
+        columns={columns}/>
       <CurrentUserModal/>
     </>
   );

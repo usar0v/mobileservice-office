@@ -32,4 +32,4 @@ export const addDiscount = createAsyncThunk(
     const user = await requester.post('user/discount', data);
     return user;
   }
-)
+);

@@ -11,7 +11,7 @@ const NumberSeparator: FC<INumberSeparator> = ({sum, color}) => {
     <>
       <NumberFormat
         value={sum}
-        thousandsGroupStyle={'lakh'}
+        thousandsGroupStyle={'thousand'}
         prefix={'$ '}
         displayType={'text'}
         thousandSeparator={true}
