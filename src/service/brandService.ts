@@ -19,9 +19,10 @@ export const getGamesBrand = createAsyncThunk(
 );
 
 export const getProgramsBrand = createAsyncThunk(
-  'brand/getPhonesBrand',
+  'brand/getProgramsBrand',
   async () => {
     const response = await requester.get(`brand/program`);
     return response;
   }
 );
+

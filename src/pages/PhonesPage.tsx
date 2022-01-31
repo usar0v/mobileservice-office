@@ -6,7 +6,9 @@ import {useAppDispatch, useAppSelector} from "../hooks";
 import Spinner from "../utils/spinner";
 import UpdateServiceModal from "../components/modals/UpdateServiceModal";
 import {getPhonesBrand} from "../service/brandService";
-import {MobileOutlined} from "@ant-design/icons";
+import {BranchesOutlined, MobileOutlined} from "@ant-design/icons";
+import {Row} from "antd";
+import ItemBrandComponent from "../components/ui/ItemBrandComponent";
 
 const PhonesPage = () => {
   const dispatch = useAppDispatch();
@@ -32,7 +34,7 @@ const PhonesPage = () => {
         loading={updateLoading}
         currentService={currentPhone}
         currentModalVisible={currentModalVisible}
-        brands={phonesBrand}/>
+        />
 
       {phones.map(item => (
         <div key={item.title}>
@@ -40,6 +42,17 @@ const PhonesPage = () => {
           <AppTable brand={phonesBrand} data={item.items}/>
         </div>
       ))}
+      <Title className={'title'} level={3}>
+        <BranchesOutlined style={{marginRight: 10}}/>
+        Бренды
+      </Title>
+      <hr style={{borderColor: '#074ba2'}}/>
+
+      <Row justify={'space-around'}>
+        {phonesBrand.map(item => (
+          <ItemBrandComponent item={item}/>
+        ))}
+      </Row>
     </>
   );
 };

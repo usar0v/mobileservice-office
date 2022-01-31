@@ -53,7 +53,9 @@ const AppTable: FC<Props> = ({data, brand}) => {
       title: 'Редактирование',
       key: 'redactor',
       render: (text: string, record: IServiceItem) => (
-        <Button onClick={() => showModal(record)} type={'link'}>Редактировать</Button>
+        <Button
+          type="primary" ghost
+          onClick={() => showModal(record)} >Редактировать</Button>
       ),
     },
     {
@@ -62,7 +64,7 @@ const AppTable: FC<Props> = ({data, brand}) => {
       render: (text: string, record: any) => (
         <Button
           onClick={() => deleteService(record.id)}
-          danger type={'link'}>Удалить</Button>
+          danger >Удалить</Button>
       ),
     },
   ];

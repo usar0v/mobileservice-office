@@ -26,7 +26,8 @@ const MenuComponent: FC = ({children}) => {
                 pathname === '/programs' ? '2' :
                   pathname === '/games' ? '4' :
                     pathname === '/phones' ? '3' :
-                      pathname === '/add_service' ? '5' : '0'
+                      pathname === '/add_service' ? '5' :
+                        pathname === '/add_brand' ? '6' : '0'
               ]
             }
             defaultSelectedKeys={['0']}>

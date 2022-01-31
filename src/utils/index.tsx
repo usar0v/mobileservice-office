@@ -3,6 +3,7 @@ import {
   MobileOutlined,
   UserOutlined,
   RobotOutlined,
+  PlusCircleOutlined, PlusOutlined
   PlusCircleOutlined,
   HomeOutlined
 } from "@ant-design/icons";
@@ -39,6 +40,17 @@ export const MenuItems = [
     path: '/add_service',
     icon: <PlusCircleOutlined />,
   },
+  {
+    title: 'Добавить бренд',
+    path: '/add_brand',
+    icon: <PlusOutlined />,
+  },
+];
+
+export const Services = [
+  {id: 'phone', title: 'Телефоны'},
+  {id: 'program', title: 'Программы'},
+  {id: 'game', title: 'Игры'},
 ];
 
 export const orderPaths = {

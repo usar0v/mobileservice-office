@@ -7,6 +7,7 @@ import PhonesPage from "./PhonesPage";
 import ProgramsPage from "./ProgramsPage";
 import UsersPage from "./UsersPage";
 import AddServicePage from "./AddServicePage";
+import AddBrandPage from "./AddBrandPage";
 import OrderPage from "./OrderPage";
 import {orderPaths} from "../utils";
 
@@ -20,6 +21,7 @@ const AppPage: FC = () => {
         <Route path={'/programs'} element={<ProgramsPage/>}/>
         <Route path={'/users'} element={<UsersPage/>}/>
         <Route path={'/add_service'} element={<AddServicePage/>}/>
+        <Route path={'/add_brand'} element={<AddBrandPage/>}/>
         <Route path={orderPaths.programs} element={<OrderPage/>}/>
         <Route path={orderPaths.games} element={<OrderPage/>}/>
         <Route path={orderPaths.phones} element={<OrderPage/>}/>

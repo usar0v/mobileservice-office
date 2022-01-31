@@ -64,13 +64,13 @@ const AuthPage: FC = () => {
         <div style={{margin: "12px 0px"}}>
           <Input
             style={{marginBottom: 20}}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
             type={"email"}
             placeholder={"Email адрес"}
           />
           <Input
             onPressEnter={() => checkUser()}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
             type={"password"}
             placeholder={"Пароль"}
           />
