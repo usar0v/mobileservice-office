@@ -12,7 +12,7 @@ import ItemBrandComponent from "../components/ui/ItemBrandComponent";
 
 const PhonesPage = () => {
   const dispatch = useAppDispatch();
-  const {phones, isLoading, currentModalVisible, currentPhone, updateLoading} = useAppSelector(state => state.phone)
+  const {phones, isLoading, currentModalVisible, currentPhone, updateLoading} = useAppSelector(state => state.phone);
   const {phonesBrand} = useAppSelector(state => state.brand);
 
   useEffect(() => {

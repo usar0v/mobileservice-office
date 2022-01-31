@@ -29,6 +29,10 @@ const setUserInUsers = (state: IUserSlice, payload: IUser) => {
     if (item.id === payload.id) return payload;
     return item;
   });
+  state.filterUsers = state.users.map(item => {
+    if (item.id === payload.id) return payload;
+    return item;
+  });
   state.currentUser = payload;
 }
 

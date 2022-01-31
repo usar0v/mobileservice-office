@@ -130,7 +130,7 @@ const AddServiceComponent: FC<Props> = ({brand, activeService}) => {
           <Timeline.Item
             key={item}
             dot={<CloseOutlined onClick={() => deleteInstructionStep(item)} className="timeline-clock-icon"/>}
-            color={'red'}>{item}</Timeline.Item>
+            color={'red'} style={{color: 'white'}}>{item}</Timeline.Item>
         ))}
       </Timeline>
       <Row>
