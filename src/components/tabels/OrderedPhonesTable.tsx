@@ -10,6 +10,7 @@ import NumberSeparator from "../ui/NumberSeparator";
 import {getAllUsers} from "../../service/userService";
 import {getPhones} from "../../service/phoneService";
 import {IService, IServiceItem} from "../../models/IService";
+import {IUser} from "../../models/IUser";
 
 const {Title} = Typography;
 
@@ -22,8 +23,6 @@ const OrderedPhonesTable = () => {
 
   useEffect(() => {
     dispatch(getOrderedPhones());
-    dispatch(getPhones());
-    dispatch(getAllUsers());
   }, []);
 
 
@@ -35,25 +34,15 @@ const OrderedPhonesTable = () => {
     },
     {
       title: 'Название',
-      dataIndex: 'phoneId',
-      key: 'phoneId',
-      render: (id: number) => {
-        let phoneArr: IServiceItem[] = [];
-        for (let i = 0; i < phones.length; i++) {
-          phones[i].items.forEach(item => phoneArr.push(item));
-        }
-        const titlePhone = phoneArr.find((phone) => phone.id === id)?.title;
-        return <div>{titlePhone}</div>
-      },
+      dataIndex: 'phone',
+      key: 'phone',
+      render: (phone: IServiceItem) => phone.title,
     },
     {
       title: 'эл. адрес',
-      dataIndex: 'userId',
-      key: 'userId',
-      render: (id: number) => {
-        const userEmail = users.find(user => user.id === id)?.email;
-        return <div>{userEmail}</div>
-      }
+      dataIndex: 'user',
+      key: 'user',
+      render: (user: IUser) => user.email
     },
     {
       title: 'Цена',
