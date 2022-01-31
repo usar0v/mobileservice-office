@@ -25,12 +25,13 @@ const AddBrandPage = () => {
   };
 
   const activeService = Services.find(v => v.id === service);
+
   return (
     <div>
       <Title className={'title'} level={3} style={{marginBottom: 40}}>Добавить Бренд</Title>
       <Row justify={'center'}>
         <Col span={24} md={15}>
-          <Card style={{backgroundColor: '#2d4364', color: 'white', padding: 20}}>
+          <Card style={{backgroundColor: '#002d49', color: 'white', padding: 20}}>
             <Select value={service} style={{width: '100%', marginBottom: 15}} onChange={e => setService(e)}>
               {Services.map((item) => (
                 <Select.Option key={item.id} value={item.id}>{item.title}</Select.Option>

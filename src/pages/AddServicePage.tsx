@@ -7,7 +7,7 @@ import {useAppDispatch, useAppSelector} from "../hooks";
 import {Services} from "../utils";
 
 const AddServicePage: FC = () => {
-  const [service, setService] = useState('phone');
+  const [service, setService] = useState<string>('phone');
 
   const PHONE_SERVICE = service === 'phone';
   const PROGRAM_SERVICE = service === 'program';
@@ -47,7 +47,7 @@ const AddServicePage: FC = () => {
       </Row>
       <Row justify={'center'}>
         <Col span={22} md={16}>
-          <Card style={{backgroundColor: '#2d4364', color: 'white'}}>
+          <Card style={{backgroundColor: '#002d49', color: 'white'}}>
             <AddServiceComponent activeService={activeService} brand={brand}/>
           </Card>
         </Col>

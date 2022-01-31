@@ -29,15 +29,6 @@ const AppTable: FC<Props> = ({data, brand}) => {
       render: (text: string) => <a>{text}</a>,
     },
     {
-      title: 'Бренд',
-      key: 'brand',
-      dataIndex: 'brandId',
-      render: (text: number) => {
-        const brandTitle = brand.find(v => v.id == text)?.name;
-        return <span>{brandTitle}</span>;
-      }
-    },
-    {
       title: 'Цена',
       dataIndex: 'price',
       key: 'price',
