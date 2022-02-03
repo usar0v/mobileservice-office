@@ -3,8 +3,8 @@ import {
   MobileOutlined,
   UserOutlined,
   RobotOutlined,
-  PlusCircleOutlined, PlusOutlined
   PlusCircleOutlined,
+  PlusOutlined,
   HomeOutlined
 } from "@ant-design/icons";
 
