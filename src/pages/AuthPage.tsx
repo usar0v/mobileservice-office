@@ -22,7 +22,7 @@ const AuthPage: FC = () => {
         if (token) {
           dispatch(setUser({token}));
           successMessage('Вы успешно вошли !');
-        }
+        };
       })
       .catch((err) => {
         const data = err.response.data;

@@ -26,7 +26,7 @@ const ItemBrandComponent: FC<Props> = ({item}) => {
         dispatch(deleteBrand({type: name, id: item.id}));
         successMessage('Бренд успешно удален');
       }).catch(err => {
-      errorMessage('Что то пошло не так');
+      errorMessage('Сначала удалите сервисы этого бренда, и попробуйте заново');
     }).finally(() => {
       setLoading(false);
     })
@@ -45,7 +45,7 @@ const ItemBrandComponent: FC<Props> = ({item}) => {
 
   return (
     <Col span={24} md={7}>
-      <Card key={item.id} style={{marginTop: 10, backgroundColor: '#2d4364'}}>
+      <Card key={item.id} style={{marginTop: 10, backgroundColor: '#002d49'}}>
         <div className={'d-flex-between'}>
           <Title className={'title'} style={{color: 'white'}} level={4}>{item.name}</Title>
           <Button loading={loading} onClick={removeBrand} danger >
