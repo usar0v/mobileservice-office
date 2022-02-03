@@ -7,17 +7,13 @@ import TableTemplate from "./TableTemplate";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {changePhoneStatus, getOrderedPhones} from "../../service/orderService";
 import NumberSeparator from "../ui/NumberSeparator";
-import {getAllUsers} from "../../service/userService";
-import {getPhones} from "../../service/phoneService";
-import {IService, IServiceItem} from "../../models/IService";
+import {IServiceItem} from "../../models/IService";
 import {IUser} from "../../models/IUser";
 
 const {Title} = Typography;
 
 const OrderedPhonesTable = () => {
   const {orderedPhones, loading} = useAppSelector(state => state.order);
-  const {phones} = useAppSelector(state => state.phone);
-  const {users} = useAppSelector(state => state.user);
 
   const dispatch = useAppDispatch();
 

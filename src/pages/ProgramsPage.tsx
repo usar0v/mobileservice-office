@@ -47,7 +47,7 @@ const ProgramsPage = () => {
       </Title>
       <hr style={{borderColor: '#074ba2'}}/>
 
-      <Row justify={'space-around'}>
+      <Row>
         {programsBrand.map(item => (
           <ItemBrandComponent item={item}/>
         ))}

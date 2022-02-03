@@ -6,8 +6,8 @@ export interface IServiceItem {
   term: string;
   instructionTitle: string;
   instructionStep: string[];
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 
