@@ -9,6 +9,8 @@ import moment from "moment";
 import {IOrderedGame, IOrderedProgram} from "../../models/IOrder";
 import TableTemplate from "./TableTemplate";
 import {RobotOutlined} from "@ant-design/icons";
+import {setFilterValue} from "../../store/slices/userSlice";
+import {useNavigate} from "react-router-dom";
 
 const {Title} = Typography;
 
@@ -16,11 +18,16 @@ const OrderedProgramsTable = () => {
   const {orderedGames, loading} = useAppSelector(state => state.order);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getOrderedGames());
   }, []);
 
+  const handleClickEmail = (email: string) => {
+    navigate('/users');
+    dispatch(setFilterValue(email));
+  }
 
   const columns = [
     {
@@ -38,7 +45,8 @@ const OrderedProgramsTable = () => {
       title: 'эл. адрес',
       dataIndex: 'user',
       key: 'user',
-      render: (user: IUser) => user.email
+      render: (user: IUser) =>
+        <div className={'email'} onClick={() => handleClickEmail(user.email)}>{user.email}</div>
     },
     {
       title: 'Цена',
@@ -50,6 +58,9 @@ const OrderedProgramsTable = () => {
       title: 'Никнейм',
       dataIndex: 'nickName',
       key: 'nickName',
+      render: (value: string) => (
+        value ? value : <div style={{textAlign: 'center', color: 'red'}}>НЕТ</div>
+      )
     },
     {
       title: 'Статус',

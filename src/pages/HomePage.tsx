@@ -28,24 +28,20 @@ const HomePage = () => {
         <HomeOutlined style={{marginRight: 10}}/>
         Главная
       </Title>
-      <Row style={{marginTop: 20}}>
-        <Col xs={24} md={8}>
+      <Row style={{marginTop: 20}} justify={'space-between'}>
+        <Col xs={24} md={12}>
           <CardComponent
             path={'/ordered_phones'}
             color={'#00c54c'}
             title={'Заказанные телефоны'}
             content={orderedPhones.length}
           />
-        </Col>
-        <Col xs={24} md={8}>
           <CardComponent
             path={'/ordered_programs'}
             color={'#ff8800'}
             title={'Заказанные программы'}
             content={orderedPrograms.length}
           />
-        </Col>
-        <Col xs={24} md={8}>
           <CardComponent
             path={'/ordered_games'}
             color={'#ff0000'}
@@ -53,9 +49,9 @@ const HomePage = () => {
             content={(orderedGames?.length).toString()}
           />
         </Col>
-      </Row>
-      <Row justify={'center'}>
-        <ReportCard/>
+        <Col xs={24} md={12}>
+          <ReportCard/>
+        </Col>
       </Row>
     </>
   );
