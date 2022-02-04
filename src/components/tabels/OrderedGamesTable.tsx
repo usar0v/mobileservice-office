@@ -6,7 +6,7 @@ import {IServiceItem} from "../../models/IService";
 import {IUser} from "../../models/IUser";
 import NumberSeparator from "../ui/NumberSeparator";
 import moment from "moment";
-import {IOrderedGame} from "../../models/IOrder";
+import {IOrderedGame, IOrderedPhone, IOrderedProgram} from "../../models/IOrder";
 import TableTemplate from "./TableTemplate";
 import {RobotOutlined} from "@ant-design/icons";
 import {setFilterValue} from "../../store/slices/userSlice";
@@ -66,6 +66,21 @@ const OrderedProgramsTable = () => {
       title: 'Статус',
       dataIndex: 'status',
       key: 'status',
+      filters: [
+        {
+          text: 'В ожидании',
+          value: 'PENDING',
+        },
+        {
+          text: 'Принятые',
+          value: 'SUCCESS',
+        },
+        {
+          text: 'Не принятые',
+          value: 'REJECTED'
+        }
+      ],
+      onFilter: (value: string, orderedPhone: IOrderedPhone) => value === orderedPhone.status,
       render: (value: string) => (
         value === "PENDING" ? <div style={{color: '#e39800'}}>В ожидании</div> :
           value === "REJECTED" ? <div style={{color: 'red'}}>Не принятый</div> :
@@ -86,14 +101,24 @@ const OrderedProgramsTable = () => {
         <Space size={10} direction={'vertical'} >
           <Button
             disabled={game.status === 'SUCCESS' || game.status === 'REJECTED'}
-            onClick={() => dispatch(changeGameStatus({id, status: "SUCCESS"}))}
+            onClick={() => dispatch(changeGameStatus({
+              id,
+              status: "SUCCESS",
+              userId: game.userId,
+              price: game.price,
+            }))}
             type={'primary'}
           >
             Принять
           </Button>
           <Button
             disabled={game.status === 'SUCCESS' || game.status === 'REJECTED'}
-            onClick={() => dispatch(changeGameStatus({id, status: "REJECTED"}))}
+            onClick={() => dispatch(changeGameStatus({
+              id,
+              status: "REJECTED",
+              userId: game.userId,
+              price: game.price,
+            }))}
             type={'primary'}
             danger
           >

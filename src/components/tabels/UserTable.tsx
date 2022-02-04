@@ -48,7 +48,7 @@ const UserTable: FC = () => {
       title: 'Потраченные',
       dataIndex: 'spentMoney',
       key: 'spentMoney',
-      render: (money: number) => <NumberSeparator sum={money}/>
+      render: (money: number) => <NumberSeparator color={'red'} sum={money}/>
     },
     {
       title: 'Роли',

@@ -20,4 +20,6 @@ export interface IService {
 export interface IChangeServiceStatus {
   id: number;
   status: string;
+  userId: number;
+  price: number;
 }

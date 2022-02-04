@@ -19,13 +19,13 @@ const AddServicePage: FC = () => {
   useEffect(() => {
     if (PHONE_SERVICE) {
       dispatch(getPhonesBrand());
-    }else if (PROGRAM_SERVICE) {
+    } else if (PROGRAM_SERVICE) {
       dispatch(getProgramsBrand());
-    }else if (GAME_SERVICE) {
+    } else if (GAME_SERVICE) {
       dispatch(getGamesBrand());
-    };
+    }
+    ;
   }, [service]);
-
 
 
   const brand = PHONE_SERVICE ? phonesBrand : PROGRAM_SERVICE ? programsBrand : gamesBrand;
@@ -47,7 +47,13 @@ const AddServicePage: FC = () => {
       </Row>
       <Row justify={'center'}>
         <Col span={22} md={16}>
-          <Card style={{backgroundColor: '#002d49', color: 'white'}}>
+          <Card
+            style={{
+              backgroundColor: '#002d49',
+              color: 'white',
+              padding: 20,
+              borderRadius: 10,
+            }}>
             <AddServiceComponent activeService={activeService} brand={brand}/>
           </Card>
         </Col>
