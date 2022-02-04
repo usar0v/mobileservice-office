@@ -18,6 +18,7 @@ const OrderedPhonesTable = () => {
   const {orderedPhones, loading} = useAppSelector(state => state.order);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getOrderedPhones());
@@ -108,7 +109,7 @@ const OrderedPhonesTable = () => {
       </Title>
       <TableTemplate
         rowKey={(orderedPhone: IOrderedPhone) => orderedPhone.id}
-        loading={getOrderedPhonesLoading}
+        loading={loading}
         dataSource={orderedPhones}
         columns={columns}
       />

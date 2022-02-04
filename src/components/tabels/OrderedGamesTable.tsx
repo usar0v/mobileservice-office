@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Button, Space, Typography} from "antd";
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {changeGameStatus, changeProgramStatus, getOrderGames, getOrderPrograms} from "../../service/orderService";
+import {changeGameStatus, getOrderedGames} from "../../service/orderService";
 import {IServiceItem} from "../../models/IService";
 import {IUser} from "../../models/IUser";
 import NumberSeparator from "../ui/NumberSeparator";
@@ -18,7 +18,7 @@ const OrderedProgramsTable = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getOrderGames());
+    dispatch(getOrderedGames());
   }, []);
 
 

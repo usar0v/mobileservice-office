@@ -3,30 +3,24 @@ import {IOrderedGame, IOrderedPhone, IOrderedProgram} from "../../models/IOrder"
 import {
   changeGameStatus,
   changePhoneStatus,
-  changeProgramStatus,
-  getOrderedPhones,
-  getOrderGames,
-  getOrderPrograms
+  changeProgramStatus, getOrderedGames,
+  getOrderedPhones, getOrderedPrograms,
 } from "../../service/orderService";
 
 
 interface IOrderSlice {
   orderedPhones: IOrderedPhone[];
   orderedPrograms: IOrderedProgram[];
-  getOrderedPhonesLoading: boolean;
-  getOrderedProgramsLoading: boolean;
-  changeStatusLoading: boolean;
-  orderedPrograms: IOrderedProgram[];
   orderedGames: IOrderedGame[];
+  loading: boolean;
+  changeStatusLoading: boolean;
 }
 
 const initialState: IOrderSlice = {
   orderedPhones: [],
   orderedPrograms: [],
-  getOrderedPhonesLoading: false,
-  getOrderedProgramsLoading: false,
   changeStatusLoading: false,
-  orderedPrograms: [],
+  loading: false,
   orderedGames: [],
 }
 
@@ -36,10 +30,10 @@ const orderSlice = createSlice({
   reducers: {},
   extraReducers: {
     [getOrderedPhones.pending.type]: (state) => {
-      state.getOrderedPhonesLoading = true;
+      state.loading = true;
     },
     [getOrderedPhones.fulfilled.type]: (state, {payload}: PayloadAction<IOrderedPhone[]>) => {
-      state.getOrderedPhonesLoading = false;
+      state.loading = false;
       state.orderedPhones = payload;
     },
     [changePhoneStatus.pending.type]: (state) => {
@@ -52,10 +46,10 @@ const orderSlice = createSlice({
         return  phone;
       });
     },
-    [getOrderPrograms.pending.type]: (state) => {
+    [getOrderedPrograms.pending.type]: (state) => {
       state.loading = true;
     },
-    [getOrderPrograms.fulfilled.type]: (state, {payload}: PayloadAction<IOrderedProgram[]>) => {
+    [getOrderedPrograms.fulfilled.type]: (state, {payload}: PayloadAction<IOrderedProgram[]>) => {
       state.loading = false;
       state.orderedPrograms = payload;
     },
@@ -69,10 +63,10 @@ const orderSlice = createSlice({
         return  program;
       });
     },
-    [getOrderGames.pending.type]: (state) => {
+    [getOrderedGames.pending.type]: (state) => {
       state.loading = true;
     },
-    [getOrderGames.fulfilled.type]: (state, {payload}: PayloadAction<IOrderedGame[]>) => {
+    [getOrderedGames.fulfilled.type]: (state, {payload}: PayloadAction<IOrderedGame[]>) => {
       state.loading = false;
       state.orderedGames = payload;
     },

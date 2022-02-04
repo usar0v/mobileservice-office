@@ -4,7 +4,7 @@ import {HomeOutlined} from "@ant-design/icons";
 import CardComponent from "../components/ui/CardComponent";
 import {useAppDispatch, useAppSelector} from "../hooks";
 import {getAllUsers} from "../service/userService";
-import {getOrderedPhones, getOrderGames, getOrderPrograms} from "../service/orderService";
+import {getOrderedGames, getOrderedPhones, getOrderedPrograms} from "../service/orderService";
 import ReportCard from "../components/ui/ReportCard";
 
 const {Title} = Typography;
@@ -17,8 +17,8 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(getOrderedPhones());
     dispatch(getAllUsers());
-    dispatch(getOrderGames());
-    dispatch(getOrderPrograms());
+    dispatch(getOrderedGames());
+    dispatch(getOrderedPrograms());
   }, []);
 
 

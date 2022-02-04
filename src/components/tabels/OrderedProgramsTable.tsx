@@ -11,12 +11,11 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import TableTemplate from "./TableTemplate";
 import {setFilterValue} from "../../store/slices/userSlice";
 import {useNavigate} from "react-router-dom";
-import {getAllUsers} from "../../service/userService";
 
 const {Title} = Typography;
 
 const OrderedProgramsTable = () => {
-  const {orderedPrograms, getOrderedProgramsLoading} = useAppSelector(state => state.order);
+  const {orderedPrograms, loading} = useAppSelector(state => state.order);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -108,7 +107,7 @@ const OrderedProgramsTable = () => {
       </Title>
       <TableTemplate
         rowKey={(program: IOrderedProgram) => program.id}
-        loading={getOrderedProgramsLoading}
+        loading={loading}
         dataSource={orderedPrograms}
         columns={columns}
       />
