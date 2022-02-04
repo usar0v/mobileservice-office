@@ -3,6 +3,7 @@ import {Layout, Menu} from "antd";
 import '../../styles.less';
 import {MenuItems} from "../../utils";
 import {useLocation, useNavigate} from "react-router-dom";
+import Title from "antd/lib/typography/Title";
 
 const {Content, Footer, Sider} = Layout;
 
@@ -17,7 +18,9 @@ const MenuComponent: FC = ({children}) => {
           breakpoint="sm"
           collapsedWidth="0"
         >
-          <div className="logo"/>
+          <div className="logo">
+            <Title style={{color: 'white', textAlign: 'center'}} level={4}>Mobile Service</Title>
+          </div>
           <Menu
             theme="dark"
             mode="inline"

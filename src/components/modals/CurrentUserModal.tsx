@@ -39,7 +39,7 @@ const CurrentUserModal = () => {
             <b>Email:</b>
           </Col>
           <Col span={14}>
-            {currentUser?.email}
+            <a href={`malto:${currentUser?.email}`}>{currentUser?.email}</a>
           </Col>
         </Row>
         <Row justify={'space-between'} style={{marginBottom: 20}}>

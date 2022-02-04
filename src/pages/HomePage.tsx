@@ -3,20 +3,22 @@ import {Col, Row, Typography} from "antd";
 import {HomeOutlined} from "@ant-design/icons";
 import CardComponent from "../components/ui/CardComponent";
 import {useAppDispatch, useAppSelector} from "../hooks";
-import {getOrderedPhones, getOrderedPrograms} from "../service/orderService";
 import {getAllUsers} from "../service/userService";
+import {getOrderedPhones, getOrderGames, getOrderPrograms} from "../service/orderService";
+import ReportCard from "../components/ui/ReportCard";
 
 const {Title} = Typography;
 
 const HomePage = () => {
-  const {orderedPhones, orderedPrograms} = useAppSelector(state => state.order);
+  const {orderedPhones, orderedGames, orderedPrograms} = useAppSelector(state => state.order);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getOrderedPhones());
-    dispatch(getOrderedPrograms());
     dispatch(getAllUsers());
+    dispatch(getOrderGames());
+    dispatch(getOrderPrograms());
   }, []);
 
 
@@ -48,9 +50,12 @@ const HomePage = () => {
             path={'/ordered_games'}
             color={'#ff0000'}
             title={'Заказанные игры'}
-            content={'100'}
+            content={(orderedGames?.length).toString()}
           />
         </Col>
+      </Row>
+      <Row justify={'center'}>
+        <ReportCard/>
       </Row>
     </>
   );

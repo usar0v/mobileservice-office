@@ -15,8 +15,8 @@ import {setFilterUsers, setFilterValue} from "../../store/slices/userSlice";
 const {Title} = Typography;
 
 const OrderedPhonesTable = () => {
-  const {orderedPhones, getOrderedPhonesLoading} = useAppSelector(state => state.order);
-  const navigate = useNavigate();
+  const {orderedPhones, loading} = useAppSelector(state => state.order);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {

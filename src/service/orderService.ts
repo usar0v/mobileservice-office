@@ -18,11 +18,11 @@ export const changePhoneStatus = createAsyncThunk(
   }
 );
 
-export const getOrderedPrograms = createAsyncThunk(
-  'order/getOrderedPrograms',
+export const getOrderPrograms = createAsyncThunk(
+  'order/getOrderPrograms',
   async () => {
-    const orderedPrograms = requester.get('program/order');
-    return orderedPrograms;
+    const orderedPhones = requester.get('program/order');
+    return orderedPhones;
   }
 );
 
@@ -34,8 +34,8 @@ export const changeProgramStatus = createAsyncThunk(
   }
 );
 
-export const getOrderedGames = createAsyncThunk(
-  'order/getOrderedGames',
+export const getOrderGames = createAsyncThunk(
+  'order/getOrderGames',
   async () => {
     const orderedGames = requester.get('game/order');
     return orderedGames;

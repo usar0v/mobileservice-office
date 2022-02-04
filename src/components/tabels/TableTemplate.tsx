@@ -4,7 +4,7 @@ import {Empty, Table} from "antd";
 
 interface ITableTemplate {
   rowKey: (data: any) => any;
-  loading: boolean;
+  loading?: boolean;
   dataSource: any,
   columns: any;
 }
