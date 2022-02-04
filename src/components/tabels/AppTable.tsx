@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
-import {Button, Empty, Table} from "antd";
+import {Button} from "antd";
 import {IServiceItem} from "../../models/IService";
-import {useAppDispatch, useAppSelector} from "../../hooks";
+import {useAppDispatch} from "../../hooks";
 import {IBrand} from "../../models/IBrand";
 import NumberSeparator from "../ui/NumberSeparator";
 import {useLocation} from "react-router-dom";
@@ -45,18 +45,18 @@ const AppTable: FC<Props> = ({data, brand}) => {
       title: 'Редактирование',
       key: 'redactor',
       render: (text: string, record: IServiceItem) => (
-        <Button
-          type="primary" ghost
-          onClick={() => showModal(record)} >Редактировать</Button>
+        <Button type="primary" ghost onClick={() => showModal(record)}>
+          Редактировать
+        </Button>
       ),
     },
     {
       title: 'Удаление',
       key: 'remove',
       render: (text: string, record: any) => (
-        <Button
-          onClick={() => deleteService(record.id)}
-          danger >Удалить</Button>
+        <Button onClick={() => deleteService(record.id)} danger>
+          Удалить
+        </Button>
       ),
     },
   ];
@@ -64,21 +64,23 @@ const AppTable: FC<Props> = ({data, brand}) => {
   const showModal = (record: IServiceItem) => {
     if (pathname == '/phones') {
       dispatch(showUpdatePhoneModal(record));
-    }else if (pathname == '/games') {
+    } else if (pathname == '/games') {
       dispatch(showUpdateGameModal(record));
     } else if (pathname == '/programs') {
       dispatch(showUpdateProgramModal(record));
-    };
+    }
+    ;
   };
 
   const deleteService = (id: number) => {
     if (pathname == '/phones') {
       dispatch(deletePhone(id));
-    }else if (pathname == '/games') {
+    } else if (pathname == '/games') {
       dispatch(deleteGame(id));
     } else if (pathname == '/programs') {
       dispatch(deleteProgram(id));
-    };
+    }
+    ;
   };
 
   return (
