@@ -4,11 +4,9 @@ import Title from "antd/lib/typography/Title";
 import {useAppDispatch, useAppSelector} from "../hooks";
 import Spinner from "../utils/spinner";
 import {getPrograms} from "../service/programService";
-import {AndroidOutlined, BranchesOutlined} from "@ant-design/icons";
+import {AndroidOutlined} from "@ant-design/icons";
 import UpdateServiceModal from "../components/modals/UpdateServiceModal";
 import {getProgramsBrand} from "../service/brandService";
-import {Row} from "antd";
-import ItemBrandComponent from "../components/ui/ItemBrandComponent";
 
 const ProgramsPage = () => {
   const dispatch = useAppDispatch();
@@ -41,17 +39,6 @@ const ProgramsPage = () => {
           <AppTable brand={programsBrand} data={item.items}/>
         </div>
       ))}
-      <Title className={'title'} level={3}>
-        <BranchesOutlined style={{marginRight: 10}}/>
-        Бренды
-      </Title>
-      <hr style={{borderColor: '#074ba2'}}/>
-
-      <Row>
-        {programsBrand.map(item => (
-          <ItemBrandComponent item={item}/>
-        ))}
-      </Row>
     </>
   );
 };

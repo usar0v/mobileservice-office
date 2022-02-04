@@ -1,7 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Button, Form, Input, InputNumber, Modal, Select, Space, Timeline} from "antd";
-import {useAppDispatch, useAppSelector} from "../../hooks";
-import {IBrand} from "../../models/IBrand";
+import {Button, Form, Input, InputNumber, Modal, Space, Timeline} from "antd";
+import {useAppDispatch} from "../../hooks";
 import {CloseOutlined} from "@ant-design/icons";
 import {useLocation} from "react-router-dom";
 import {IServiceItem} from "../../models/IService";

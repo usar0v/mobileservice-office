@@ -88,17 +88,9 @@ const AppTable: FC<Props> = ({data, brand}) => {
 
       <TableTemplate
         rowKey={(service: IServiceItem) => service.id}
-        // loading={loading}
         dataSource={data}
         columns={columns}
       />
-      {/*<Table*/}
-      {/*  rowKey={(service: IServiceItem) => service.id}*/}
-      {/*  scroll={{x: true}}*/}
-      {/*  locale={{*/}
-      {/*    emptyText: <Empty description={'Пусто'}/>*/}
-      {/*  }} columns={columns}*/}
-      {/*  dataSource={data}/>*/}
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import React, {FC} from 'react';
-import {IUser} from "../../models/IUser";
 import {Empty, Table} from "antd";
 
 interface ITableTemplate {
