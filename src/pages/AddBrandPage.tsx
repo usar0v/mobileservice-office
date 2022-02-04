@@ -7,6 +7,9 @@ import {errorMessage, successMessage} from "../utils/messages";
 import ItemBrandComponent from "../components/ui/ItemBrandComponent";
 import {getGamesBrand, getPhonesBrand, getProgramsBrand} from "../service/brandService";
 import {useAppDispatch, useAppSelector} from "../hooks";
+import {getPhones} from "../service/phoneService";
+import {getGames} from "../service/gameService";
+import {getPrograms} from "../service/programService";
 
 const AddBrandPage = () => {
   const [service, setService] = useState<string>('phone');
@@ -15,24 +18,40 @@ const AddBrandPage = () => {
 
   const dispatch = useAppDispatch();
   const {gamesBrand, programsBrand, phonesBrand} = useAppSelector(state => state.brand);
+  const {programs} = useAppSelector(state => state.program);
+  const {phones} = useAppSelector(state => state.phone);
+  const {games} = useAppSelector(state => state.game);
+
 
   useEffect(() => {
     if (service === 'phone'){
+      dispatch(getPhones());
       dispatch(getPhonesBrand());
     }else if (service === 'game'){
+      dispatch(getGames());
       dispatch(getGamesBrand());
     }else if (service === 'program'){
+      dispatch(getPrograms());
       dispatch(getProgramsBrand());
     }
   },[service]);
 
   const addBrand = () => {
     setLoading(true);
-    requester.post(`brand/${activeService?.id}`,
-      {name: brand})
+    requester.post(`brand`, {
+      name: brand,
+      type: service,
+      })
       .then(res => {
         successMessage('Бренд успешно добавлен');
         setBrand('');
+        if (service == 'phone') {
+          dispatch(getPhonesBrand());
+        } else if (service == 'program') {
+          dispatch(getProgramsBrand());
+        } else if (service == 'game') {
+          dispatch(getGamesBrand());
+        }
       }).catch(err => {
       errorMessage('Что то пошло не так');
     }).finally(() => {
@@ -42,6 +61,7 @@ const AddBrandPage = () => {
 
   const activeService = Services.find(v => v.id === service);
   const serviceBrand = (service === 'program' ? programsBrand : service === 'game' ? gamesBrand : phonesBrand) || [];
+  const services = (service === 'program' ? programs : service === 'game' ? games : phones) || [];
 
   return (
     <div>
@@ -73,7 +93,7 @@ const AddBrandPage = () => {
         </Col>
         <Col span={24} md={12}>
           {serviceBrand.map(item => (
-            <ItemBrandComponent status={service} item={item}/>
+            <ItemBrandComponent services={services} status={service} item={item}/>
           ))}
         </Col>
       </Row>

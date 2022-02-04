@@ -5,7 +5,7 @@ import requester from "../utils/requester";
 export const getPhonesBrand = createAsyncThunk(
   'brand/getPhonesBrand',
   async () => {
-    const response = await requester.get(`brand/phone`);
+    const response = await requester.get(`brand`,{type: 'phone'});
     return response;
   }
 );
@@ -13,7 +13,7 @@ export const getPhonesBrand = createAsyncThunk(
 export const getGamesBrand = createAsyncThunk(
   'brand/getGamesBrand',
   async () => {
-    const response = await requester.get(`brand/game`);
+    const response = await requester.get(`brand`, {type: 'game'});
     return response;
   }
 );
@@ -21,7 +21,7 @@ export const getGamesBrand = createAsyncThunk(
 export const getProgramsBrand = createAsyncThunk(
   'brand/getProgramsBrand',
   async () => {
-    const response = await requester.get(`brand/program`);
+    const response = await requester.get(`brand`, {type: 'program'});
     return response;
   }
 );
