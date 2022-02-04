@@ -89,7 +89,7 @@ const CurrentUserModal = () => {
             <b>Скидка:</b>
           </Col>
           <Col span={14}>
-            {currentUser?.discount} %
+            $ {currentUser?.discount}
           </Col>
         </Row>
         <hr color={'#e1e1e1'}/>
@@ -116,7 +116,7 @@ const CurrentUserModal = () => {
           <Col>
             <Popover
               content={<AddDiscountPopover user={currentUser} setPopover={setDiscountPopover}/>}
-              title="Процент скидки"
+              title="Сумма скидки"
               trigger="click"
               visible={discountPopover}
               onVisibleChange={changeDiscountPopover}

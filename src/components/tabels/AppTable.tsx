@@ -24,16 +24,20 @@ const AppTable: FC<Props> = ({data, brand}) => {
 
   const columns = [
     {
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id',
+    },
+    {
       title: 'Название',
       dataIndex: 'title',
       key: 'title',
-      render: (text: string) => <a>{text}</a>,
     },
     {
       title: 'Цена',
       dataIndex: 'price',
       key: 'price',
-      render: (text: number) => <span><NumberSeparator sum={text}/></span>,
+      render: (text: number) => <NumberSeparator sum={text}/>,
     },
     {
       title: 'Время',

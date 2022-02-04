@@ -6,11 +6,13 @@ import {useAppDispatch, useAppSelector} from "../hooks";
 import {getAllUsers} from "../service/userService";
 import {getOrderedGames, getOrderedPhones, getOrderedPrograms} from "../service/orderService";
 import ReportCard from "../components/ui/ReportCard";
+import Spinner from "../utils/spinner";
 
 const {Title} = Typography;
 
 const HomePage = () => {
-  const {orderedPhones, orderedGames, orderedPrograms} = useAppSelector(state => state.order);
+  const {orderedPhones, orderedGames, orderedPrograms, loading} = useAppSelector(state => state.order);
+  const {loading: userLoading} = useAppSelector(state => state.user);
 
   const dispatch = useAppDispatch();
 
@@ -22,6 +24,7 @@ const HomePage = () => {
   }, []);
 
 
+  if (loading || userLoading) return <Spinner/>
   return (
     <>
       <Title className={'title'} level={3}>
