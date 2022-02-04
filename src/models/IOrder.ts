@@ -37,4 +37,3 @@ export interface IOrderedGame {
   createdAt: Date;
   updatedAt: Date;
 }
-

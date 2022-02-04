@@ -3,6 +3,7 @@ import {Col, Row, Typography} from "antd";
 import {HomeOutlined} from "@ant-design/icons";
 import CardComponent from "../components/ui/CardComponent";
 import {useAppDispatch, useAppSelector} from "../hooks";
+import {getAllUsers} from "../service/userService";
 import {getOrderedPhones, getOrderGames, getOrderPrograms} from "../service/orderService";
 import ReportCard from "../components/ui/ReportCard";
 
@@ -15,9 +16,9 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(getOrderedPhones());
+    dispatch(getAllUsers());
     dispatch(getOrderGames());
     dispatch(getOrderPrograms());
-
   }, []);
 
 
@@ -33,7 +34,7 @@ const HomePage = () => {
             path={'/ordered_phones'}
             color={'#00c54c'}
             title={'Заказанные телефоны'}
-            content={(orderedPhones?.length).toString()}
+            content={orderedPhones.length}
           />
         </Col>
         <Col xs={24} md={8}>
@@ -41,7 +42,7 @@ const HomePage = () => {
             path={'/ordered_programs'}
             color={'#ff8800'}
             title={'Заказанные программы'}
-            content={(orderedPrograms?.length).toString()}
+            content={orderedPrograms.length}
           />
         </Col>
         <Col xs={24} md={8}>

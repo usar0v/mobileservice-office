@@ -1,44 +1,52 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {Button, Space, Typography} from "antd";
 import {AndroidOutlined} from "@ant-design/icons";
-import {useAppDispatch, useAppSelector} from "../../hooks";
-import {changeProgramStatus, getOrderPrograms} from "../../service/orderService";
 import {IServiceItem} from "../../models/IService";
 import {IUser} from "../../models/IUser";
 import NumberSeparator from "../ui/NumberSeparator";
 import moment from "moment";
 import {IOrderedProgram} from "../../models/IOrder";
+import {changeProgramStatus, getOrderedPrograms} from "../../service/orderService";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 import TableTemplate from "./TableTemplate";
+import {setFilterValue} from "../../store/slices/userSlice";
+import {useNavigate} from "react-router-dom";
+import {getAllUsers} from "../../service/userService";
 
 const {Title} = Typography;
 
 const OrderedProgramsTable = () => {
-  const {orderedPrograms, loading} = useAppSelector(state => state.order);
-
+  const {orderedPrograms, getOrderedProgramsLoading} = useAppSelector(state => state.order);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getOrderPrograms());
+    dispatch(getOrderedPrograms());
   }, []);
 
+  const handleClickEmail = (email: string) => {
+    navigate('/users');
+    dispatch(setFilterValue(email));
+  }
 
   const columns = [
     {
-      title: 'ID',
+      title: "ID",
       dataIndex: 'id',
-      key: 'id',
+      key: 'id'
     },
     {
       title: 'Название',
       dataIndex: 'program',
       key: 'program',
-      render: (program: IServiceItem) => program.title,
+      render: (program: IServiceItem) => program.title
     },
     {
-      title: 'эл. адрес',
+      title: 'эл адрес',
       dataIndex: 'user',
-      key: 'user',
-      render: (user: IUser) => user.email
+      key: 'userId',
+      render: (user: IUser) =>
+        <div className={'email'} onClick={() => handleClickEmail(user.email)}>{user.email}</div>
     },
     {
       title: 'Цена',
@@ -47,9 +55,9 @@ const OrderedProgramsTable = () => {
       render: (value: number) => <NumberSeparator sum={value}/>
     },
     {
-      title: 'эл. адрес для программы',
+      title: 'эл адрес для доступа',
       dataIndex: 'email',
-      key: 'email',
+      key: 'email'
     },
     {
       title: 'Статус',
@@ -71,17 +79,17 @@ const OrderedProgramsTable = () => {
       title: 'Управление',
       dataIndex: 'id',
       key: 'success',
-      render: (id: number, program: IOrderedProgram) => (
+      render: (id: number, phone: IOrderedProgram) => (
         <Space size={10} direction={'vertical'} >
           <Button
-            disabled={program.status === 'SUCCESS' || program.status === 'REJECTED'}
+            disabled={phone.status === 'SUCCESS' || phone.status === 'REJECTED'}
             onClick={() => dispatch(changeProgramStatus({id, status: "SUCCESS"}))}
             type={'primary'}
           >
             Принять
           </Button>
           <Button
-            disabled={program.status === 'SUCCESS' || program.status === 'REJECTED'}
+            disabled={phone.status === 'SUCCESS' || phone.status === 'REJECTED'}
             onClick={() => dispatch(changeProgramStatus({id, status: "REJECTED"}))}
             type={'primary'}
             danger
@@ -91,8 +99,7 @@ const OrderedProgramsTable = () => {
         </Space>
       ),
     },
-  ];
-
+  ]
   return (
     <>
       <Title className={'title'} level={3}>
@@ -100,8 +107,8 @@ const OrderedProgramsTable = () => {
         Заказанные программы
       </Title>
       <TableTemplate
-        rowKey={(orderedProgram: IOrderedProgram) => orderedProgram.id}
-        loading={loading}
+        rowKey={(program: IOrderedProgram) => program.id}
+        loading={getOrderedProgramsLoading}
         dataSource={orderedPrograms}
         columns={columns}
       />

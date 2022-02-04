@@ -5,19 +5,21 @@ import {IUser} from "../../models/IUser";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {getAllUsers} from "../../service/userService";
 import {showCurrentUserModal} from "../../store/slices/userSlice";
-import CurrentUserModal from "../modals/CurrentUserModal";
 import NumberSeparator from "../ui/NumberSeparator";
 import TableTemplate from "./TableTemplate";
 
 
 const UserTable: FC = () => {
-  const {loading, filterUsers} = useAppSelector(state => state.user);
+  const {loading, filterUsers, filterUsersValue} = useAppSelector(state => state.user);
   const {user} = useAppSelector(state => state.auth);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getAllUsers());
+    if (!filterUsersValue) {
+      dispatch(getAllUsers());
+    }
   }, []);
+
 
   const columns = [
     {
@@ -92,7 +94,6 @@ const UserTable: FC = () => {
         loading={loading}
         dataSource={filterUsers}
         columns={columns}/>
-      <CurrentUserModal/>
     </>
   );
 };

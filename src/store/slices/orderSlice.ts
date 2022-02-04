@@ -11,8 +11,10 @@ import {
 
 
 interface IOrderSlice {
-  orderedPhones: IOrderedPhone[],
-  loading: boolean;
+  orderedPhones: IOrderedPhone[];
+  orderedPrograms: IOrderedProgram[];
+  getOrderedPhonesLoading: boolean;
+  getOrderedProgramsLoading: boolean;
   changeStatusLoading: boolean;
   orderedPrograms: IOrderedProgram[];
   orderedGames: IOrderedGame[];
@@ -20,7 +22,9 @@ interface IOrderSlice {
 
 const initialState: IOrderSlice = {
   orderedPhones: [],
-  loading: false,
+  orderedPrograms: [],
+  getOrderedPhonesLoading: false,
+  getOrderedProgramsLoading: false,
   changeStatusLoading: false,
   orderedPrograms: [],
   orderedGames: [],
@@ -32,10 +36,10 @@ const orderSlice = createSlice({
   reducers: {},
   extraReducers: {
     [getOrderedPhones.pending.type]: (state) => {
-      state.loading = true;
+      state.getOrderedPhonesLoading = true;
     },
     [getOrderedPhones.fulfilled.type]: (state, {payload}: PayloadAction<IOrderedPhone[]>) => {
-      state.loading = false;
+      state.getOrderedPhonesLoading = false;
       state.orderedPhones = payload;
     },
     [changePhoneStatus.pending.type]: (state) => {
