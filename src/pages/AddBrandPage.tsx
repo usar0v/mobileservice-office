@@ -59,7 +59,6 @@ const AddBrandPage = () => {
     });
   };
 
-  const activeService = Services.find(v => v.id === service);
   const serviceBrand = (service === 'program' ? programsBrand : service === 'game' ? gamesBrand : phonesBrand) || [];
   const services = (service === 'program' ? programs : service === 'game' ? games : phones) || [];
 
@@ -93,7 +92,7 @@ const AddBrandPage = () => {
         </Col>
         <Col span={24} md={12}>
           {serviceBrand.map(item => (
-            <ItemBrandComponent services={services} status={service} item={item}/>
+            <ItemBrandComponent key={item.id} services={services} status={service} item={item}/>
           ))}
         </Col>
       </Row>

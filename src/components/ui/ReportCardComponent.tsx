@@ -2,18 +2,27 @@ import React, {FC, useEffect} from 'react';
 import {Card, Typography} from "antd";
 import NumberSeparatorComponent from "./NumberSeparatorComponent";
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {gamesIncome, phonesIncome, programsIncome, totalIncome} from "../../service/reportService";
+import {
+  gamesIncome,
+  phonesIncome,
+  programsIncome,
+  totalIncome
+} from "../../service/reportService";
 
 const ReportCardComponent: FC = () => {
   const dispatch = useAppDispatch();
-  const {sum, programsSum, phonesSum, gamesSum} = useAppSelector(state => state.report);
+  const {
+    sum,
+    programsSum,
+    phonesSum,
+    gamesSum
+  } = useAppSelector(state => state.report);
 
   useEffect(() => {
     dispatch(totalIncome());
     dispatch(phonesIncome());
     dispatch(gamesIncome());
     dispatch(programsIncome());
-
   },[]);
 
   return (

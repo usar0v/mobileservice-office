@@ -19,10 +19,7 @@ const AddDiscountPopover: FC<IAddDiscount> = ({user, setPopover}) => {
   return (
     <>
       <Space>
-        <InputNumber
-          value={discount}
-          onChange={setDiscount}
-        />
+        <InputNumber value={discount} onChange={setDiscount}/>
         <Button
           loading={addDiscountLoading}
           danger

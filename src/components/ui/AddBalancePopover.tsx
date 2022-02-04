@@ -6,7 +6,7 @@ import {IUser} from "../../models/IUser";
 
 interface IAddBalance {
   user: IUser | null;
-  setPopover: (prev: (prev: any) => boolean ) => void;
+  setPopover: (prev: (prev: any) => boolean) => void;
 }
 
 
@@ -28,15 +28,14 @@ const AddBalancePopover: FC<IAddBalance> = ({user, setPopover}) => {
           danger
           onClick={() => {
             if (user) {
-               dispatch(addBalance({
-                 email: user.email,
-                 balance: balance
-               }))
-               setPopover(prev => !prev);
-               setBalance(10);
+              dispatch(addBalance({
+                email: user.email,
+                balance: balance
+              }))
+              setPopover(prev => !prev);
+              setBalance(10);
             }
-          }}
-        >
+          }}>
           пополнить
         </Button>
       </Space>

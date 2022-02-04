@@ -44,7 +44,6 @@ const ItemBrandComponent: FC<Props> = ({item, status, services}) => {
   };
   const a = services.find(v => v.title == item.name);
   const checkValidData = a?.items.find(v => v.brandId == item.id);
-  console.log(checkValidData)
 
   return (
     <div key={item.id} className={'brand_card'}>
