@@ -33,3 +33,19 @@ export const changeProgramStatus = createAsyncThunk(
     return program;
   }
 );
+
+export const getOrderedGames = createAsyncThunk(
+  'order/getOrderedGames',
+  async () => {
+    const orderedGames = requester.get('game/order');
+    return orderedGames;
+  }
+);
+
+export const changeGameStatus = createAsyncThunk(
+  'order/changeGameStatus',
+  async (data: IChangeServiceStatus) => {
+    const game = requester.post('game/change_status', data);
+    return game;
+  }
+);

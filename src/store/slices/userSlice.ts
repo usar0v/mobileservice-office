@@ -6,6 +6,7 @@ interface IUserSlice {
   users: IUser[];
   filterUsers: IUser[],
   currentUser: IUser | null;
+  filterUsersValue: string;
   loading: boolean;
   currentUserModal: boolean;
   changeRoleLoading: boolean;
@@ -22,6 +23,7 @@ const initialState: IUserSlice = {
   changeRoleLoading: false,
   addBalanceLoading: false,
   addDiscountLoading: false,
+  filterUsersValue: '',
 }
 
 const setUserInUsers = (state: IUserSlice, payload: IUser) => {
@@ -50,6 +52,9 @@ const userSlice = createSlice({
     },
     setFilterUsers(state, {payload}: PayloadAction<string>) {
       state.filterUsers = state.users.filter(item => item.email.includes(payload));
+    },
+    setFilterValue(state, {payload}: PayloadAction<string>) {
+      state.filterUsersValue = payload.split('@')[0];
     }
   },
   extraReducers: {
@@ -90,4 +95,5 @@ export const {
   showCurrentUserModal,
   hideCurrentUserModal,
   setFilterUsers,
+  setFilterValue,
 } = userSlice.actions;

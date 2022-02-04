@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 
 interface ICard {
   title: string;
-  content: string;
+  content: string | number;
   color?: string;
   path: string;
 }

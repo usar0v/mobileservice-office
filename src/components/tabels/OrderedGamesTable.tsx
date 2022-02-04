@@ -5,6 +5,11 @@ import {RobotOutlined} from "@ant-design/icons";
 const {Title} = Typography;
 
 const OrderedGamesTable = () => {
+
+  const columns = {
+    title: ''
+  }
+
   return (
     <>
       <Title className={'title'} level={3}>

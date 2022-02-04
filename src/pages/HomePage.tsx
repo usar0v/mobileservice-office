@@ -2,17 +2,21 @@ import React, {useEffect} from 'react';
 import {Col, Row, Typography} from "antd";
 import {HomeOutlined} from "@ant-design/icons";
 import CardComponent from "../components/ui/CardComponent";
-import {useAppDispatch} from "../hooks";
-import {getOrderedPhones} from "../service/orderService";
+import {useAppDispatch, useAppSelector} from "../hooks";
+import {getOrderedPhones, getOrderedPrograms} from "../service/orderService";
+import {getAllUsers} from "../service/userService";
 
 const {Title} = Typography;
 
 const HomePage = () => {
+  const {orderedPhones, orderedPrograms} = useAppSelector(state => state.order);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getOrderedPhones());
+    dispatch(getOrderedPrograms());
+    dispatch(getAllUsers());
   }, []);
 
 
@@ -28,7 +32,7 @@ const HomePage = () => {
             path={'/ordered_phones'}
             color={'#00c54c'}
             title={'Заказанные телефоны'}
-            content={'10'}
+            content={orderedPhones.length}
           />
         </Col>
         <Col xs={24} md={8}>
@@ -36,7 +40,7 @@ const HomePage = () => {
             path={'/ordered_programs'}
             color={'#ff8800'}
             title={'Заказанные программы'}
-            content={'100'}
+            content={orderedPrograms.length}
           />
         </Col>
         <Col xs={24} md={8}>

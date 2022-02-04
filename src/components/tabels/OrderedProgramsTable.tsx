@@ -9,17 +9,25 @@ import {IOrderedProgram} from "../../models/IOrder";
 import {changeProgramStatus, getOrderedPrograms} from "../../service/orderService";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import TableTemplate from "./TableTemplate";
+import {setFilterValue} from "../../store/slices/userSlice";
+import {useNavigate} from "react-router-dom";
+import {getAllUsers} from "../../service/userService";
 
 const {Title} = Typography;
 
 const OrderedProgramsTable = () => {
   const {orderedPrograms, getOrderedProgramsLoading} = useAppSelector(state => state.order);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getOrderedPrograms());
   }, []);
 
+  const handleClickEmail = (email: string) => {
+    navigate('/users');
+    dispatch(setFilterValue(email));
+  }
 
   const columns = [
     {
@@ -37,7 +45,8 @@ const OrderedProgramsTable = () => {
       title: 'эл адрес',
       dataIndex: 'user',
       key: 'userId',
-      render: (user: IUser) => user.email
+      render: (user: IUser) =>
+        <div className={'email'} onClick={() => handleClickEmail(user.email)}>{user.email}</div>
     },
     {
       title: 'Цена',
