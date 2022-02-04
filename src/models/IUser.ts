@@ -9,8 +9,8 @@ export interface IUser {
   country: string;
   discount: number;
   role: number;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface IChangeUserRole {

@@ -34,6 +34,7 @@ const UserTable: FC = () => {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
+      render: (email: string) => <a href={`mailto:${email}`}>{email}</a>
     },
     {
       title: 'Баланс',

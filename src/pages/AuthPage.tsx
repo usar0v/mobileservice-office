@@ -1,11 +1,12 @@
 import React, {FC, useState} from 'react';
 import {Button, Card, Input} from "antd";
-import {LockOutlined} from "@ant-design/icons";
 import requester from "../utils/requester";
 import {errorMessage, successMessage} from "../utils/messages";
 import {setUser} from "../store/slices/authSlice";
 import {useDispatch} from "react-redux";
 import Title from "antd/lib/typography/Title";
+
+const logo = require("../files/logo.jpeg")
 
 const AuthPage: FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -22,7 +23,8 @@ const AuthPage: FC = () => {
         if (token) {
           dispatch(setUser({token}));
           successMessage('Вы успешно вошли !');
-        };
+        }
+        ;
       })
       .catch((err) => {
         const data = err.response.data;
@@ -59,9 +61,9 @@ const AuthPage: FC = () => {
       }}>
         <Title level={3} style={{textAlign: 'center', color: '#18233f'}}>Mobile Service</Title>
         <div style={{textAlign: "center", margin: "12px 0px"}}>
-          <LockOutlined style={{fontSize: 44}}/>
+          <img style={{height: 70}} src={logo}/>
         </div>
-        <div style={{margin: "12px 0px"}}>
+        <div style={{margin: "20px 0px"}}>
           <Input
             style={{marginBottom: 20}}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}

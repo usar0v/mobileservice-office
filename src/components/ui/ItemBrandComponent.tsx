@@ -44,15 +44,15 @@ const ItemBrandComponent: FC<Props> = ({item}) => {
   };
 
   return (
-    <Col span={24} md={7}>
-      <Card key={item.id} style={{marginTop: 10, backgroundColor: '#002d49'}}>
+    <Col span={24} md={8}>
+      <div key={item.id} className={'brand_card'}>
         <div className={'d-flex-between'}>
-          <Title className={'title'} style={{color: 'white'}} level={4}>{item.name}</Title>
-          <Button loading={loading} onClick={removeBrand} danger >
-            <DeleteOutlined/>
+          <div className={'title'} style={{color: 'white', fontSize: 20}}>{item.name}</div>
+          <Button loading={loading} onClick={removeBrand} shape="circle" type={'primary'} danger>
+            <DeleteOutlined style={{color: 'white'}}/>
           </Button>
         </div>
-      </Card>
+      </div>
     </Col>
   );
 };

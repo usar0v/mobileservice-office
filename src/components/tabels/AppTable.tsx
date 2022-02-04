@@ -11,6 +11,7 @@ import {showUpdateProgramModal} from "../../store/slices/programSlice";
 import {deleteGame} from "../../service/gameService";
 import {deletePhone} from "../../service/phoneService";
 import {deleteProgram} from "../../service/programService";
+import TableTemplate from "./TableTemplate";
 
 type Props = {
   data: any;
@@ -82,13 +83,20 @@ const AppTable: FC<Props> = ({data, brand}) => {
 
   return (
     <div style={{marginBottom: 60}}>
-      <Table
+
+      <TableTemplate
         rowKey={(service: IServiceItem) => service.id}
-        scroll={{x: true}}
-        locale={{
-          emptyText: <Empty description={'Пусто'}/>
-        }} columns={columns}
-        dataSource={data}/>
+        // loading={loading}
+        dataSource={data}
+        columns={columns}
+      />
+      {/*<Table*/}
+      {/*  rowKey={(service: IServiceItem) => service.id}*/}
+      {/*  scroll={{x: true}}*/}
+      {/*  locale={{*/}
+      {/*    emptyText: <Empty description={'Пусто'}/>*/}
+      {/*  }} columns={columns}*/}
+      {/*  dataSource={data}/>*/}
     </div>
   );
 };
