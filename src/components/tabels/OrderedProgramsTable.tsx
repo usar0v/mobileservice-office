@@ -5,7 +5,7 @@ import {IServiceItem} from "../../models/IService";
 import {IUser} from "../../models/IUser";
 import NumberSeparator from "../ui/NumberSeparator";
 import moment from "moment";
-import {IOrderedProgram} from "../../models/IOrder";
+import {IOrderedPhone, IOrderedProgram} from "../../models/IOrder";
 import {changeProgramStatus, getOrderedPrograms} from "../../service/orderService";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import TableTemplate from "./TableTemplate";
@@ -62,6 +62,21 @@ const OrderedProgramsTable = () => {
       title: 'Статус',
       dataIndex: 'status',
       key: 'status',
+      filters: [
+        {
+          text: 'В ожидании',
+          value: 'PENDING',
+        },
+        {
+          text: 'Принятые',
+          value: 'SUCCESS',
+        },
+        {
+          text: 'Не принятые',
+          value: 'REJECTED'
+        }
+      ],
+      onFilter: (value: string, orderedPhone: IOrderedPhone) => value === orderedPhone.status,
       render: (value: string) => (
         value === "PENDING" ? <div style={{color: '#e39800'}}>В ожидании</div> :
           value === "REJECTED" ? <div style={{color: 'red'}}>Не принятый</div> :
@@ -78,18 +93,28 @@ const OrderedProgramsTable = () => {
       title: 'Управление',
       dataIndex: 'id',
       key: 'success',
-      render: (id: number, phone: IOrderedProgram) => (
+      render: (id: number, program: IOrderedProgram) => (
         <Space size={10} direction={'vertical'} >
           <Button
-            disabled={phone.status === 'SUCCESS' || phone.status === 'REJECTED'}
-            onClick={() => dispatch(changeProgramStatus({id, status: "SUCCESS"}))}
+            disabled={program.status === 'SUCCESS' || program.status === 'REJECTED'}
+            onClick={() => dispatch(changeProgramStatus({
+              id,
+              status: "SUCCESS",
+              userId: program.userId,
+              price: program.price,
+            }))}
             type={'primary'}
           >
             Принять
           </Button>
           <Button
-            disabled={phone.status === 'SUCCESS' || phone.status === 'REJECTED'}
-            onClick={() => dispatch(changeProgramStatus({id, status: "REJECTED"}))}
+            disabled={program.status === 'SUCCESS' || program.status === 'REJECTED'}
+            onClick={() => dispatch(changeProgramStatus({
+              id,
+              status: "REJECTED",
+              userId: program.userId,
+              price: program.price,
+            }))}
             type={'primary'}
             danger
           >

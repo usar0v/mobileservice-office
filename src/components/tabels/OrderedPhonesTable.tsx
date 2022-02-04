@@ -10,7 +10,7 @@ import NumberSeparator from "../ui/NumberSeparator";
 import {IServiceItem} from "../../models/IService";
 import {IUser} from "../../models/IUser";
 import {useNavigate} from "react-router-dom";
-import {setFilterUsers, setFilterValue} from "../../store/slices/userSlice";
+import {setFilterValue} from "../../store/slices/userSlice";
 
 const {Title} = Typography;
 
@@ -63,6 +63,21 @@ const OrderedPhonesTable = () => {
       title: 'Статус',
       dataIndex: 'status',
       key: 'status',
+      filters: [
+        {
+          text: 'В ожидании',
+          value: 'PENDING',
+        },
+        {
+          text: 'Принятые',
+          value: 'SUCCESS',
+        },
+        {
+          text: 'Не принятые',
+          value: 'REJECTED'
+        }
+      ],
+      onFilter: (value: string, orderedPhone: IOrderedPhone) => value === orderedPhone.status,
       render: (value: string) => (
         value === "PENDING" ? <div style={{color: '#e39800'}}>В ожидании</div> :
           value === "REJECTED" ? <div style={{color: 'red'}}>Не принятый</div> :
@@ -83,14 +98,24 @@ const OrderedPhonesTable = () => {
         <Space size={10} direction={'vertical'}>
           <Button
             disabled={phone.status === 'SUCCESS' || phone.status === 'REJECTED'}
-            onClick={() => dispatch(changePhoneStatus({id, status: "SUCCESS"}))}
+            onClick={() => dispatch(changePhoneStatus({
+              id,
+              status: "SUCCESS",
+              userId: phone.user.id,
+              price: phone.price,
+            }))}
             type={'primary'}
           >
             Принять
           </Button>
           <Button
             disabled={phone.status === 'SUCCESS' || phone.status === 'REJECTED'}
-            onClick={() => dispatch(changePhoneStatus({id, status: "REJECTED"}))}
+            onClick={() => dispatch(changePhoneStatus({
+              id,
+              status: "REJECTED",
+              userId: phone.user.id,
+              price: phone.price,
+            }))}
             type={'primary'}
             danger
           >
