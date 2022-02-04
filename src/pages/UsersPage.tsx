@@ -11,11 +11,9 @@ const UsersPage = () => {
   const {filterUsersValue} = useAppSelector(state => state.user);
   const dispatch = useAppDispatch();
 
-
   useEffect(() => {
     dispatch(setFilterUsers(filterUsersValue));
   }, [filterUsersValue]);
-
 
   return (
     <>

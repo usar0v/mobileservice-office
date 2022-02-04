@@ -5,8 +5,8 @@ import CardComponent from "../components/ui/CardComponent";
 import {useAppDispatch, useAppSelector} from "../hooks";
 import {getAllUsers} from "../service/userService";
 import {getOrderedGames, getOrderedPhones, getOrderedPrograms} from "../service/orderService";
-import ReportCard from "../components/ui/ReportCard";
-import Spinner from "../utils/spinner";
+import ReportCardComponent from "../components/ui/ReportCardComponent";
+import SpinnerComponent from "../components/ui/SpinnerComponent";
 
 const {Title} = Typography;
 
@@ -24,7 +24,7 @@ const HomePage = () => {
   }, []);
 
 
-  if (loading || userLoading) return <Spinner/>
+  if (loading || userLoading) return <SpinnerComponent/>
   return (
     <>
       <Title className={'title'} level={3}>
@@ -53,7 +53,7 @@ const HomePage = () => {
           />
         </Col>
         <Col xs={24} md={12}>
-          <ReportCard/>
+          <ReportCardComponent/>
         </Col>
       </Row>
     </>

@@ -6,7 +6,7 @@ import {IOrderedPhone} from "../../models/IOrder";
 import TableTemplate from "./TableTemplate";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {changePhoneStatus, getOrderedPhones} from "../../service/orderService";
-import NumberSeparator from "../ui/NumberSeparator";
+import NumberSeparatorComponent from "../ui/NumberSeparatorComponent";
 import {IServiceItem} from "../../models/IService";
 import {IUser} from "../../models/IUser";
 import {useNavigate} from "react-router-dom";
@@ -52,7 +52,7 @@ const OrderedPhonesTable = () => {
       title: 'Цена',
       dataIndex: 'price',
       key: 'price',
-      render: (value: number) => <NumberSeparator sum={value}/>
+      render: (value: number) => <NumberSeparatorComponent sum={value}/>
     },
     {
       title: 'Серий номер',

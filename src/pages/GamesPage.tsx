@@ -3,7 +3,7 @@ import AppTable from "../components/tabels/AppTable";
 import Title from "antd/lib/typography/Title";
 import {useAppDispatch, useAppSelector} from "../hooks";
 import {getGames} from "../service/gameService";
-import Spinner from "../utils/spinner";
+import SpinnerComponent from "../components/ui/SpinnerComponent";
 import UpdateServiceModal from "../components/modals/UpdateServiceModal";
 import {getGamesBrand} from "../service/brandService";
 import {RobotOutlined} from "@ant-design/icons";
@@ -19,7 +19,7 @@ const GamePage = () => {
   }, []);
 
   if (isLoading) {
-    return <Spinner/>;
+    return <SpinnerComponent/>;
   }
 
   return (

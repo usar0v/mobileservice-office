@@ -5,7 +5,7 @@ import {useAppSelector} from "./hooks";
 import requester from "./utils/requester";
 import {useDispatch} from "react-redux";
 import {setUser, signOut} from "./store/slices/authSlice";
-import Spinner from "./utils/spinner";
+import SpinnerComponent from "./components/ui/SpinnerComponent";
 
 const App: FC = () => {
   const [loading, setLoading] = useState(false);
@@ -32,7 +32,7 @@ const App: FC = () => {
   };
 
   if (loading) {
-    return <Spinner/>
+    return <SpinnerComponent/>
   }
   return (
     <>

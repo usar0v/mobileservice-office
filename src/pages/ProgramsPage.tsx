@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import AppTable from "../components/tabels/AppTable";
 import Title from "antd/lib/typography/Title";
 import {useAppDispatch, useAppSelector} from "../hooks";
-import Spinner from "../utils/spinner";
+import SpinnerComponent from "../components/ui/SpinnerComponent";
 import {getPrograms} from "../service/programService";
 import {AndroidOutlined} from "@ant-design/icons";
 import UpdateServiceModal from "../components/modals/UpdateServiceModal";
@@ -19,7 +19,7 @@ const ProgramsPage = () => {
   }, []);
 
   if (isLoading) {
-    return <Spinner/>;
+    return <SpinnerComponent/>;
   }
 
   return (

@@ -3,7 +3,7 @@ import {Button, Space, Typography} from "antd";
 import {AndroidOutlined} from "@ant-design/icons";
 import {IServiceItem} from "../../models/IService";
 import {IUser} from "../../models/IUser";
-import NumberSeparator from "../ui/NumberSeparator";
+import NumberSeparatorComponent from "../ui/NumberSeparatorComponent";
 import moment from "moment";
 import {IOrderedPhone, IOrderedProgram} from "../../models/IOrder";
 import {changeProgramStatus, getOrderedPrograms} from "../../service/orderService";
@@ -51,7 +51,7 @@ const OrderedProgramsTable = () => {
       title: 'Цена',
       dataIndex: 'price',
       key: 'price',
-      render: (value: number) => <NumberSeparator sum={value}/>
+      render: (value: number) => <NumberSeparatorComponent sum={value}/>
     },
     {
       title: 'эл адрес для доступа',

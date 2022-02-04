@@ -3,7 +3,7 @@ import AppTable from "../components/tabels/AppTable";
 import Title from "antd/lib/typography/Title";
 import {getPhones} from "../service/phoneService";
 import {useAppDispatch, useAppSelector} from "../hooks";
-import Spinner from "../utils/spinner";
+import SpinnerComponent from "../components/ui/SpinnerComponent";
 import UpdateServiceModal from "../components/modals/UpdateServiceModal";
 import {getPhonesBrand} from "../service/brandService";
 import {MobileOutlined} from "@ant-design/icons";
@@ -19,7 +19,7 @@ const PhonesPage = () => {
   }, []);
 
   if (isLoading) {
-    return <Spinner/>;
+    return <SpinnerComponent/>;
   }
 
   return (

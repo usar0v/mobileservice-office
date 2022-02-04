@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Button, Col, Modal, Popover, Row, Space} from "antd";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {hideCurrentUserModal} from "../../store/slices/userSlice";
-import NumberSeparator from "../ui/NumberSeparator";
+import NumberSeparatorComponent from "../ui/NumberSeparatorComponent";
 import { changeRole} from "../../service/userService";
 import AddBalancePopover from "../ui/AddBalancePopover";
 import AddDiscountPopover from "../ui/AddDiscountPopover";
@@ -64,7 +64,7 @@ const CurrentUserModal = () => {
             <b>Текущий баланс:</b>
           </Col>
           <Col span={14}>
-            <NumberSeparator sum={currentUser?.sum}/>
+            <NumberSeparatorComponent sum={currentUser?.sum}/>
           </Col>
         </Row>
         <Row justify={'space-between'} style={{marginBottom: 20}}>
@@ -72,7 +72,7 @@ const CurrentUserModal = () => {
             <b>Потраченный баланс:</b>
           </Col>
           <Col span={14}>
-            <NumberSeparator color={'red'} sum={currentUser?.spentMoney}/>
+            <NumberSeparatorComponent color={'red'} sum={currentUser?.spentMoney}/>
           </Col>
         </Row>
         <Row justify={'space-between'} style={{marginBottom: 20}}>

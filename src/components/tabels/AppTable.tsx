@@ -3,7 +3,7 @@ import {Button} from "antd";
 import {IServiceItem} from "../../models/IService";
 import {useAppDispatch} from "../../hooks";
 import {IBrand} from "../../models/IBrand";
-import NumberSeparator from "../ui/NumberSeparator";
+import NumberSeparatorComponent from "../ui/NumberSeparatorComponent";
 import {useLocation} from "react-router-dom";
 import {showUpdatePhoneModal} from "../../store/slices/phoneSlice";
 import {showUpdateGameModal} from "../../store/slices/gameSlice";
@@ -37,7 +37,7 @@ const AppTable: FC<Props> = ({data, brand}) => {
       title: 'Цена',
       dataIndex: 'price',
       key: 'price',
-      render: (text: number) => <NumberSeparator sum={text}/>,
+      render: (text: number) => <NumberSeparatorComponent sum={text}/>,
     },
     {
       title: 'Время',

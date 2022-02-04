@@ -1,6 +1,6 @@
 import {Space, Spin} from "antd";
 
-const Spinner = () => {
+const SpinnerComponent = () => {
   return (
     <Space className={'spinner'} size="middle">
       <Spin size="large"/>
@@ -8,4 +8,4 @@ const Spinner = () => {
   );
 };
 
-export default Spinner;
+export default SpinnerComponent;

@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import {changeGameStatus, getOrderedGames} from "../../service/orderService";
 import {IServiceItem} from "../../models/IService";
 import {IUser} from "../../models/IUser";
-import NumberSeparator from "../ui/NumberSeparator";
+import NumberSeparatorComponent from "../ui/NumberSeparatorComponent";
 import moment from "moment";
 import {IOrderedGame, IOrderedPhone, IOrderedProgram} from "../../models/IOrder";
 import TableTemplate from "./TableTemplate";
@@ -52,7 +52,7 @@ const OrderedProgramsTable = () => {
       title: 'Цена',
       dataIndex: 'price',
       key: 'price',
-      render: (value: number) => <NumberSeparator sum={value}/>
+      render: (value: number) => <NumberSeparatorComponent sum={value}/>
     },
     {
       title: 'Никнейм',

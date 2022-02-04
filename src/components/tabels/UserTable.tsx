@@ -5,7 +5,7 @@ import {IUser} from "../../models/IUser";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {getAllUsers} from "../../service/userService";
 import {showCurrentUserModal} from "../../store/slices/userSlice";
-import NumberSeparator from "../ui/NumberSeparator";
+import NumberSeparatorComponent from "../ui/NumberSeparatorComponent";
 import TableTemplate from "./TableTemplate";
 
 
@@ -42,13 +42,13 @@ const UserTable: FC = () => {
       title: 'Баланс',
       dataIndex: 'sum',
       key: 'sum',
-      render: (money: number) => <NumberSeparator sum={money}/>
+      render: (money: number) => <NumberSeparatorComponent sum={money}/>
     },
     {
       title: 'Потраченные',
       dataIndex: 'spentMoney',
       key: 'spentMoney',
-      render: (money: number) => <NumberSeparator color={'red'} sum={money}/>
+      render: (money: number) => <NumberSeparatorComponent color={'red'} sum={money}/>
     },
     {
       title: 'Роли',

@@ -6,7 +6,7 @@ interface INumberSeparator {
   color?: string;
 }
 
-const NumberSeparator: FC<INumberSeparator> = ({sum, color}) => {
+const NumberSeparatorComponent: FC<INumberSeparator> = ({sum, color}) => {
   return (
     <>
       <NumberFormat
@@ -21,4 +21,4 @@ const NumberSeparator: FC<INumberSeparator> = ({sum, color}) => {
   );
 };
 
-export default NumberSeparator;
+export default NumberSeparatorComponent;
