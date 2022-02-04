@@ -6,9 +6,7 @@ import {useAppDispatch, useAppSelector} from "../hooks";
 import Spinner from "../utils/spinner";
 import UpdateServiceModal from "../components/modals/UpdateServiceModal";
 import {getPhonesBrand} from "../service/brandService";
-import {BranchesOutlined, MobileOutlined} from "@ant-design/icons";
-import {Row} from "antd";
-import ItemBrandComponent from "../components/ui/ItemBrandComponent";
+import {MobileOutlined} from "@ant-design/icons";
 
 const PhonesPage = () => {
   const dispatch = useAppDispatch();
@@ -42,16 +40,6 @@ const PhonesPage = () => {
           <AppTable brand={phonesBrand} data={item.items}/>
         </div>
       ))}
-      <Title className={'title'} level={3}>
-        <BranchesOutlined style={{marginRight: 10}}/>
-        Бренды
-      </Title>
-      <hr style={{borderColor: '#074ba2'}}/>
-      <Row>
-        {phonesBrand.map(item => (
-          <ItemBrandComponent item={item}/>
-        ))}
-      </Row>
     </>
   );
 };

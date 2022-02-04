@@ -6,7 +6,7 @@ import {IServiceItem} from "../../models/IService";
 import {IUser} from "../../models/IUser";
 import NumberSeparator from "../ui/NumberSeparator";
 import moment from "moment";
-import {IOrderedGame, IOrderedProgram} from "../../models/IOrder";
+import {IOrderedGame} from "../../models/IOrder";
 import TableTemplate from "./TableTemplate";
 import {RobotOutlined} from "@ant-design/icons";
 import {setFilterValue} from "../../store/slices/userSlice";

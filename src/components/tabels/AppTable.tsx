@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
-import {Button, Empty, Table} from "antd";
+import {Button} from "antd";
 import {IServiceItem} from "../../models/IService";
-import {useAppDispatch, useAppSelector} from "../../hooks";
+import {useAppDispatch} from "../../hooks";
 import {IBrand} from "../../models/IBrand";
 import NumberSeparator from "../ui/NumberSeparator";
 import {useLocation} from "react-router-dom";
@@ -86,17 +86,9 @@ const AppTable: FC<Props> = ({data, brand}) => {
 
       <TableTemplate
         rowKey={(service: IServiceItem) => service.id}
-        // loading={loading}
         dataSource={data}
         columns={columns}
       />
-      {/*<Table*/}
-      {/*  rowKey={(service: IServiceItem) => service.id}*/}
-      {/*  scroll={{x: true}}*/}
-      {/*  locale={{*/}
-      {/*    emptyText: <Empty description={'Пусто'}/>*/}
-      {/*  }} columns={columns}*/}
-      {/*  dataSource={data}/>*/}
     </div>
   );
 };

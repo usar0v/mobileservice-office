@@ -10,7 +10,7 @@ import NumberSeparator from "../ui/NumberSeparator";
 import {IServiceItem} from "../../models/IService";
 import {IUser} from "../../models/IUser";
 import {useNavigate} from "react-router-dom";
-import {setFilterUsers, setFilterValue} from "../../store/slices/userSlice";
+import {setFilterValue} from "../../store/slices/userSlice";
 
 const {Title} = Typography;
 

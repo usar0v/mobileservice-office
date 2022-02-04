@@ -15,7 +15,7 @@ const CurrentUserModal = () => {
     addBalanceLoading,
     addDiscountLoading,
   } = useAppSelector(state => state.user);
-
+  const {user} = useAppSelector(state => state.auth)
   const [balancePopover, setBalancePopover] = useState(false);
   const [discountPopover, setDiscountPopover] = useState(false);
 
@@ -100,6 +100,7 @@ const CurrentUserModal = () => {
               type={'primary'}
               loading={changeRoleLoading}
               danger
+              disabled={user?.id == currentUser?.id}
               onClick={() => {
                 if (currentUser) {
                   dispatch(changeRole({
