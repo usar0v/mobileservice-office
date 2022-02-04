@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import Title from "antd/lib/typography/Title";
 import {Card, Col, Row, Select} from "antd";
-import AddServiceComponent from "../components/add/AddServiceComponent";
+import AddServiceComponent from "../components/ui/AddServiceComponent";
 import {getGamesBrand, getPhonesBrand, getProgramsBrand} from "../service/brandService";
 import {useAppDispatch, useAppSelector} from "../hooks";
 import {Services} from "../utils";

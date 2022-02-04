@@ -4,8 +4,8 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import {hideCurrentUserModal} from "../../store/slices/userSlice";
 import NumberSeparator from "../ui/NumberSeparator";
 import { changeRole} from "../../service/userService";
-import AddBalancePopover from "../user/AddBalancePopover";
-import AddDiscountPopover from "../user/AddDiscountPopover";
+import AddBalancePopover from "../ui/AddBalancePopover";
+import AddDiscountPopover from "../ui/AddDiscountPopover";
 
 const CurrentUserModal = () => {
   const {
