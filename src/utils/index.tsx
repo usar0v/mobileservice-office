@@ -5,7 +5,7 @@ import {
   RobotOutlined,
   PlusCircleOutlined,
   PlusOutlined,
-  HomeOutlined
+  HomeOutlined, SettingOutlined
 } from "@ant-design/icons";
 
 
@@ -45,6 +45,11 @@ export const MenuItems = [
     path: '/add_brand',
     icon: <PlusOutlined />,
   },
+  {
+    title: 'Настройка сайта',
+    path: '/settings',
+    icon: <SettingOutlined/>
+  }
 ];
 
 export const Services = [

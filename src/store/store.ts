@@ -7,6 +7,7 @@ import gameReducer from './slices/gameSlice';
 import programReducer from './slices/programSlice';
 import orderReducer from './slices/orderSlice';
 import reportReducer from "./slices/reportSlice";
+import settingReducer from './slices/settingSlice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   game: gameReducer,
   program: programReducer,
   order: orderReducer,
-  report: reportReducer
+  report: reportReducer,
+  setting: settingReducer,
 });
 
 export const setupStore = () => {

@@ -23,3 +23,11 @@ export interface IChangeServiceStatus {
   userId: number;
   price: number;
 }
+
+export interface ISiteService {
+  id: number,
+  title: string;
+  items: [string],
+  createdAt: Date,
+  updatedAt: Date,
+}

@@ -11,6 +11,7 @@ import AddBrandPage from "./AddBrandPage";
 import OrderPage from "./OrderPage";
 import {orderPaths} from "../utils";
 import CurrentUserModal from "../components/modals/CurrentUserModal";
+import SettingsPage from "./SettingsPage";
 
 const AppPage: FC = () => {
   return (
@@ -26,6 +27,7 @@ const AppPage: FC = () => {
         <Route path={orderPaths.programs} element={<OrderPage/>}/>
         <Route path={orderPaths.games} element={<OrderPage/>}/>
         <Route path={orderPaths.phones} element={<OrderPage/>}/>
+        <Route path={'/settings'} element={<SettingsPage/>}/>
       </Routes>
       <CurrentUserModal/>
     </MenuComponent>

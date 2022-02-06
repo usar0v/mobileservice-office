@@ -27,7 +27,6 @@ const App: FC = () => {
         dispatch(signOut());
       }).finally(() => {
       setLoading(false);
-
     });
   };
 
