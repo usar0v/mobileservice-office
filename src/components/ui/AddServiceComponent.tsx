@@ -20,6 +20,7 @@ const AddServiceComponent: FC<Props> = ({brand, activeService}) => {
   const [instructionStep, setInstructionStep] = useState<string[]>([]);
   const [stepText, setStepText] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [href, setHref] = useState<string>('');
 
   useEffect(() => {
     setBrandId(brand[0]?.id);
@@ -41,7 +42,7 @@ const AddServiceComponent: FC<Props> = ({brand, activeService}) => {
     setInstructionTitle('');
     setInstructionStep([]);
     setStepText('');
-  }
+  };
 
   const addService = () => {
     setLoading(true);
@@ -51,10 +52,11 @@ const AddServiceComponent: FC<Props> = ({brand, activeService}) => {
       term,
       price,
       instructionTitle,
-      instructionStep
+      instructionStep,
+      href,
     })
       .then(() => {
-        successMessage('Успешно добавлен')
+        successMessage('Успешно добавлен');
         clearStates()
       }).catch(err => {
       errorMessage('Что то пошло не так');
@@ -133,8 +135,15 @@ const AddServiceComponent: FC<Props> = ({brand, activeService}) => {
             color={'red'} style={{color: 'white'}}>{item}</Timeline.Item>
         ))}
       </Timeline>
-      <Row>
-
+      <Row style={{marginBottom: 30, marginTop: 20}} justify={'space-between'}>
+        <Col span={9}>
+          <b>Ссылка:</b>
+        </Col>
+        <Col span={14}>
+          <Input value={href}
+                 placeholder={'необязательно'}
+                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHref(e.target.value)}/>
+        </Col>
       </Row>
       <Col className={'d-flex-center'} span={24}>
         <Button
