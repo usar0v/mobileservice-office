@@ -42,6 +42,7 @@ const AddServiceComponent: FC<Props> = ({brand, activeService}) => {
     setInstructionTitle('');
     setInstructionStep([]);
     setStepText('');
+    setHref('')
   };
 
   const addService = () => {
