@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Button, Col, Form, Input, InputNumber, Row, Select, Space, Timeline} from "antd";
+import {Button, Col, Input, InputNumber, Row, Select, Timeline} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import {IBrand} from "../../models/IBrand";
 import TextArea from "antd/lib/input/TextArea";
@@ -46,7 +46,7 @@ const AddServiceComponent: FC<Props> = ({brand, activeService}) => {
 
   const addService = () => {
     setLoading(true);
-    requester.post(`${activeService.id}`,{
+    requester.post(`${activeService.id}`, {
       title,
       brandId,
       term,
@@ -135,16 +135,18 @@ const AddServiceComponent: FC<Props> = ({brand, activeService}) => {
             color={'red'} style={{color: 'white'}}>{item}</Timeline.Item>
         ))}
       </Timeline>
-      <Row style={{marginBottom: 30, marginTop: 20}} justify={'space-between'}>
-        <Col span={9}>
-          <b>Ссылка:</b>
-        </Col>
-        <Col span={14}>
-          <Input value={href}
-                 placeholder={'необязательно'}
-                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHref(e.target.value)}/>
-        </Col>
-      </Row>
+      {activeService.id !== 'game' && (
+        <Row style={{marginBottom: 30, marginTop: 20}} justify={'space-between'}>
+          <Col span={9}>
+            <b>Ссылка:</b>
+          </Col>
+          <Col span={14}>
+            <Input value={href}
+                   placeholder={'необязательно'}
+                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHref(e.target.value)}/>
+          </Col>
+        </Row>
+      )}
       <Col className={'d-flex-center'} span={24}>
         <Button
           loading={loading}
