@@ -1,6 +1,7 @@
 import {ISiteService} from "../../models/IService";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {addSiteService, deleteSiteService, getAllSiteService} from "../../service/settingSerivce";
+import {successMessage} from "../../utils/messages";
 
 
 interface ISettingSlice {
@@ -31,6 +32,7 @@ const settingSlice = createSlice({
     [addSiteService.fulfilled.type]: (state, {payload}: PayloadAction<ISiteService>) => {
       state.loading = false;
       state.services.push(payload);
+      successMessage('Услуга успешно добавлен !');
     },
     [deleteSiteService.pending.type]: (state) => {
       state.loading = true;
@@ -38,6 +40,7 @@ const settingSlice = createSlice({
     [deleteSiteService.fulfilled.type]: (state, {payload}: PayloadAction<number>) => {
       state.loading = false;
       state.services = state.services.filter(service => service.id !== payload);
+      successMessage('Услуга усешно удален !')
     }
   }
 });
