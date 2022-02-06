@@ -29,7 +29,7 @@ const authSlice = createSlice({
       }
     },
     signOut(state) {
-      storage.remove('token')
+      storage.remove('token');
       state.isAuth = false;
       state.token = null;
       state.user = null;

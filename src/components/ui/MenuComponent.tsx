@@ -1,15 +1,18 @@
 import React, {FC} from 'react';
-import {Layout, Menu} from "antd";
+import {Button, Layout, Menu} from "antd";
 import '../../styles.less';
 import {MenuItems} from "../../utils";
 import {useLocation, useNavigate} from "react-router-dom";
 import Title from "antd/lib/typography/Title";
+import {useAppDispatch} from "../../hooks";
+import {signOut} from "../../store/slices/authSlice";
 
 const {Content, Footer, Sider} = Layout;
 
 const MenuComponent: FC = ({children}) => {
   const navigate = useNavigate();
   const {pathname} = useLocation();
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -45,6 +48,12 @@ const MenuComponent: FC = ({children}) => {
                 </Menu.Item>
               )
             }
+            <Menu.Item
+              onClick={() => dispatch(signOut())}
+              style={{textAlign: 'center'}}
+            >
+              <Button style={{width: 130}}>Выйти</Button>
+            </Menu.Item>
           </Menu>
         </Sider>
         <Layout>
