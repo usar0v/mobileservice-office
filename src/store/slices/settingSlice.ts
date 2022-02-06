@@ -1,6 +1,6 @@
 import {ISiteService} from "../../models/IService";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {getAllSiteService} from "../../service/settingSerivce";
+import {addSiteService, deleteSiteService, getAllSiteService} from "../../service/settingSerivce";
 
 
 interface ISettingSlice {
@@ -24,6 +24,20 @@ const settingSlice = createSlice({
     [getAllSiteService.fulfilled.type]: (state, {payload}: PayloadAction<ISiteService[]>) => {
       state.loading = false;
       state.services = payload;
+    },
+    [addSiteService.pending.type]: (state) => {
+      state.loading = true;
+    },
+    [addSiteService.fulfilled.type]: (state, {payload}: PayloadAction<ISiteService>) => {
+      state.loading = false;
+      state.services.push(payload);
+    },
+    [deleteSiteService.pending.type]: (state) => {
+      state.loading = true;
+    },
+    [deleteSiteService.fulfilled.type]: (state, {payload}: PayloadAction<number>) => {
+      state.loading = false;
+      state.services = state.services.filter(service => service.id !== payload);
     }
   }
 });

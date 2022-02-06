@@ -25,9 +25,9 @@ export interface IChangeServiceStatus {
 }
 
 export interface ISiteService {
-  id: number,
+  id?: number,
   title: string;
-  items: [string],
-  createdAt: Date,
-  updatedAt: Date,
+  items: string[],
+  createdAt?: Date,
+  updatedAt?: Date,
 }
