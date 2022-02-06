@@ -13,7 +13,15 @@ export const addSiteService = createAsyncThunk(
 export const getAllSiteService = createAsyncThunk(
   'setting/getAllSiteService',
   async () => {
-    const services = requester.get('setting/service');
+    const services = await requester.get('setting/service');
     return services;
   }
-)
+);
+
+export const deleteSiteService = createAsyncThunk(
+  'setting/deleteSiteService',
+  async (id: number | undefined) => {
+    await requester.post('setting/service/delete', { id });
+    return id;
+  }
+);
