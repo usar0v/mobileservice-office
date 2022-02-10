@@ -26,7 +26,7 @@ const GamePage = () => {
     <>
       <Title className={'title'} level={3}>
         <RobotOutlined style={{marginRight: 10}}/>
-        Телефоны
+        Игры
       </Title>
       <UpdateServiceModal
         loading={updateLoading}
